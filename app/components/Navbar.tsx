@@ -1,11 +1,13 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const Navbar = () => {
   return (
     <div className="flex flex-row justify-around lg:pl-[2em] lg:pt-[1em]">
-        <div className="">
-            <p className='text-2xl'>Logo</p>
+        <div className="-ml-[5em] flex">
+            <Image src='/logo.png' className='-mt-[.5em]' alt='logo' width='75' height='75'/>
+            <p className='text-2xl text-blue-700 mt-[.5em]'>Invoicer</p>
         </div>
 
         <div className='hidden lg:flex  gap-[3em]'>
@@ -16,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className='hidden lg:flex -mt-[.25em] gap-[1.5em]'>
         <Link href='/Auth/Register' className=' mt-2 text-purple-500'>Log in</Link> 
-        <button className='bg-purple-500 text-white p-[.6em] rounded-md'>Try it for free</button> 
+        <Link href='/Auth/login' className='bg-purple-500 text-white p-[.6em] rounded-md h-[3em]'>Try it for free</Link> 
         </div>
     </div>
   )
