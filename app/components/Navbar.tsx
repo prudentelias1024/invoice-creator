@@ -17,8 +17,8 @@ const Navbar = () => {
             <Link href={"/"}>About</Link>
         </div>
         <div className='hidden lg:flex -mt-[.25em] gap-[1.5em]'>
-        <Link href='/Auth/Register' className=' mt-2 text-purple-500'>Log in</Link> 
-        <Link href='/Auth/login' className='bg-purple-500 text-white p-[.6em] rounded-md h-[3em]'>Try it for free</Link> 
+        <Link href='/Auth/Login' className=' mt-2 text-purple-500'>Log in</Link> 
+        <Link href='/Auth/Register' className='bg-purple-500 text-white p-[.6em] rounded-md h-[3em]'>Try it for free</Link> 
         </div>
     </div>
   )
