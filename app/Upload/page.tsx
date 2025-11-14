@@ -7,6 +7,7 @@ import NextNProgress from 'nextjs-progressbar';
 import { MdDeleteOutline } from 'react-icons/md'
 import ProgressBar from '@ramonak/react-progress-bar'
 import * as XLSX from 'xlsx'
+// import * as pdfmaker from ''
 function Upload() {
  
  interface FileInterface  {
@@ -21,6 +22,9 @@ function Upload() {
  const [fileExt, setFileExt] = useState('')
  const [filename, setFileName] = useState('')
  const [filesize, setFileSize] = useState(0)
+ const [headers, setHeaders] = useState<Array<string>>()
+ const [keys, setKeys] = useState<Array<string>>([])
+ const [docu, setDocu] = useState<Array<string>>()
  const fileRef:RefObject<any> = useRef(null)
  const clickUpload = () => {
    fileRef.current.click()
@@ -36,6 +40,51 @@ function Upload() {
 
     const workbook = XLSX.read(base64, { type: "base64" });
     console.log(workbook)
+    const doc = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
+   
+    console.log(doc)
+    let tempkeys = []
+    let tempHeaders = []
+    
+    console.log(Object.entries(doc[0]).forEach((entry) =>{
+        tempkeys.push(entry[0])
+        tempHeaders.push(entry[1])
+    }));
+
+    //keys are used to extract the rows from the wb
+    setKeys(tempkeys)
+    
+    //headers is the first row
+    setHeaders(tempHeaders)
+   
+    //turn workbook into array
+    let temp = []
+    const temp_wb = []
+    // console.log(doc)
+    doc.forEach((row,idx) => {
+
+      if(idx > 0 ){
+          tempkeys.forEach((key) => {
+            console.log(key)
+            if(row[key] == undefined){
+               temp.push('')
+            } else{     
+              temp.push(row[key])
+            }
+          })
+          
+           temp_wb.push(temp)
+           temp = []  
+        }
+      })
+
+      console.log(temp_wb)
+      setDocu([...temp_wb])
+       
+      console.log(docu);
+     
+   
+
     // console.log(workbook.Sheets[workbook.SheetNames[0]]);
   };
 
