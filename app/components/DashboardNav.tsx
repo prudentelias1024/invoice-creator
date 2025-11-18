@@ -2,7 +2,7 @@
 'use client'
 import React, { useState } from 'react'
 import { MdCancel, MdDashboard, MdLogout } from 'react-icons/md'
-import { FaArrowLeft, FaArrowRight, FaCreativeCommons, FaCreativeCommonsBy, FaHistory,  FaMoneyBill, FaMoneyBillWave, FaUser } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaCreativeCommons, FaCreativeCommonsBy, FaFileInvoice, FaHistory,  FaMoneyBill, FaMoneyBillWave, FaUser } from 'react-icons/fa'
 import { RxHamburgerMenu } from "react-icons/rx";
 // import { useSelector } from 'react-redux';
 import { BsClockHistory } from 'react-icons/bs';
@@ -84,6 +84,18 @@ export default function Navbar() {
         
            
      </Link>
+
+       <Link href='/dashboard/payments' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
+">
+     
+      <FaFileInvoice className='text-xl'/>
+      <p className='-mt-[.15em]'>
+        Invoices
+        </p>
+        
+           
+     </Link>
+      
       
   
            <Link href='/dashboard/pay' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
@@ -99,17 +111,7 @@ export default function Navbar() {
      </Link>
       
   
-           <Link href='/dashboard/payments' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
-">
-     
-      <BsClockHistory className='text-xl'/>
-      <p className='-mt-[.15em]'>
-        Transactions
-        </p>
-        
-           
-     </Link>
-      
+         
            <Link href='/dashboard/profile' className="w-full h-[3em] px-[1em] pt-[1em] pb-[2em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
