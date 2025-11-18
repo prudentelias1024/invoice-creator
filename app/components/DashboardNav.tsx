@@ -35,7 +35,8 @@ export default function Navbar() {
 :
 
 
-      <div className=" text-white bg-green-500 z-50 h-screen fixed  top-[0em] w-[16em] -left-[1em] pl-[2em]  pr-[1.5em] py-[6.75em] flex flex-col gap-[2em] font-[Lexend]">
+      <div className=" text-white bg-green-500 z-50 h-screen fixed  top-[1em] w-[16em]
+       -left-[1em] pl-[2em]  pr-[1.5em] py-[6.75em] flex flex-col gap-[2em] font-[Lexend]">
         <MdCancel onClick={toggleNav} className='text-2xl absolute top-[1.5em] left-[80%]'/>
           <div className='inline-flex gap-[1em]'>
 
@@ -45,7 +46,7 @@ export default function Navbar() {
       </div>
       
       <div className='inline-flex gap-[1em]'>
-        <FaCreativeCommonsBy classname='text-3xl'/>
+        <FaCreativeCommonsBy className='text-3xl'/>
             <Link href='/dashboard/Pay'>My logo</Link>
       </div>
 
@@ -74,18 +75,18 @@ export default function Navbar() {
     
     <div className=' bg-white fixed h-screen hidden w-[15em]  py-[1Em] px-[1.5em]  lg:flex flex-col gap-[3em] font-[Lexend] '>
       
-           <Link  href='/dashboard/home' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
+           <Link  href='/Dashboard' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
       <MdDashboard className='text-xl  '/>
        <p className='-mt-[.15em]'>
          Dashboard
         </p>
-        
+         
            
      </Link>
 
-       <Link href='/dashboard/payments' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
+       <Link href='/Dashboard/invoices' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
       <FaFileInvoice className='text-xl'/>
@@ -98,11 +99,11 @@ export default function Navbar() {
       
       
   
-           <Link href='/dashboard/pay' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
+           <Link href='/Dashboard/assets' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
        <div className='inline-flex gap-[1em]'>
         <FaCreativeCommons className='text-3xl'/>
-            <Link href='/dashboard/Payments/'>Your Assets</Link>
+            <p >Your Assets</p>
         </div>
       
       
