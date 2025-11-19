@@ -1,8 +1,15 @@
- import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 const thiccboi = localFont({
   src: './fonts/thiccboi/THICCCBOI-Regular.woff2'
 })
@@ -27,12 +34,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
+
     <html lang="en">
       <body
         className={`${thiccboi.className} ${geistMono} antialiased`}
-      >
+        >
         {children}
       </body>
     </html>
+        </ClerkProvider>
   );
 }

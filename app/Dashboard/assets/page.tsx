@@ -12,7 +12,7 @@ export default function Assets() {
         <div className="assets flex  flex-col ml-[15em]">
             <UploadLogo/>
         <div className='flex flex-col'>
-             <p className='font-bold ml-[1.5em] mt-[1.5em]'>Logos</p>   
+             <p className='font-bold lg:ml-[3em] mt-[1.5em]'>Logos</p>   
 
              {
                 logo.length > 0? 

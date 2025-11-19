@@ -36,7 +36,7 @@ export default function Navbar() {
 
 
       <div className=" text-white bg-green-500 z-50 h-screen fixed  top-[1em] w-[16em]
-       -left-[1em] pl-[2em]  pr-[1.5em] py-[6.75em] flex flex-col gap-[2em] font-[Lexend]">
+       -left-[1em] pl-[2em]  pr-[1.5em] py-[6.75em] flex flex-col gap-[2em] ">
         <MdCancel onClick={toggleNav} className='text-2xl absolute top-[1.5em] left-[80%]'/>
           <div className='inline-flex gap-[1em]'>
 
@@ -73,13 +73,13 @@ export default function Navbar() {
       }
             </div>
     
-    <div className=' bg-white fixed h-screen hidden w-[15em]  py-[1Em] px-[1.5em]  lg:flex flex-col gap-[3em] font-[Lexend] '>
+    <div className=' bg-white fixed h-screen hidden w-[15em]  py-[1Em] px-[1.5em]  lg:flex flex-col gap-[3em]  '>
       
            <Link  href='/Dashboard' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
-      <MdDashboard className='text-xl  '/>
-       <p className='-mt-[.15em]'>
+      <MdDashboard className='text-2xl  '/>
+       <p className='mt-[.15em]'>
          Dashboard
         </p>
          
@@ -89,8 +89,8 @@ export default function Navbar() {
        <Link href='/Dashboard/invoices' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
-      <FaFileInvoice className='text-xl'/>
-      <p className='-mt-[.15em]'>
+      <FaFileInvoice className='text-2xl'/>
+      <p className='mt-[.15em]'>
         Invoices
         </p>
         
@@ -102,7 +102,7 @@ export default function Navbar() {
            <Link href='/Dashboard/assets' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
        <div className='inline-flex gap-[1em]'>
-        <FaCreativeCommons className='text-3xl'/>
+        <FaCreativeCommons className='text-2xl'/>
             <p >Your Assets</p>
         </div>
       

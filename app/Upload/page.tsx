@@ -7,10 +7,9 @@ import NextNProgress from 'nextjs-progressbar';
 import { MdDeleteOutline } from 'react-icons/md'
 import ProgressBar from '@ramonak/react-progress-bar'
 import * as XLSX from 'xlsx'
-import { jsPDF } from "jspdf";
 import Image from 'next/image'
-import autoTable from "jspdf-autotable";
-
+import { basicInvoice } from "../Invoices/Basic";
+import { finerInvoice } from "../Invoices/Finer";
 const Upload = () =>  {
  
  
@@ -108,63 +107,10 @@ const downloadPDF = () => {
    const doc = makePDF()
    doc.save("invoice.pdf")
 }
+
 const makePDF = () => {
+return finerInvoice(headers,docu)
 
-console.log(docu)
-// Default export is a4 paper, portrait, using millimeters for units
-const doc = new jsPDF();
- // --- HEADER ---
-  doc.setFontSize(30);
-  const pagewidth = doc.internal.pageSize.width;
-  const pageHeight = doc.internal.pageSize.height;
-  doc.text("Invoice", 13, 15);
- 
-  //from
-
-
-  doc.setFontSize(10);
-  doc.text("Billed to:", 14, 28);
-  doc.text("lorem ipsum LTD:", 14, 34);
-  doc.text("34, Campbell Street,Lagos State", 14, 40);
- 
-  doc.setFontSize(10);
-  doc.text("Billed From:",  140, 28);
-  doc.text("lorem ipsum LTD:", 140, 34);
-  doc.text("34, Campbell Street,Lagos State",  140, 40);
- 
-
-  
-
-  // --- TABLE DATA ---
-
-
-   
-
-  // --- AUTOTABLE ---
-  autoTable(doc, {
-    head: [headers],
-    body: docu,
-    startY: 45,
-    styles: {
-      fontSize: 10,
-      halign: "left",
-    },
-    headStyles: {
-
-      fillColor: [81,43,212], // Purple header
-      textColor: 255,
-    },
-  });
-
-  // --- FOOTER ---
-  
-  doc.setFontSize(10);
-  doc.text("Date : "+ new Date().toLocaleDateString() , 14, pageHeight - 15);
-
-  doc.text("Powered by Invoicely", 14, pageHeight - 10);
-
-  // --- SAVE PDF ---
- return doc
 }
 
 
@@ -183,14 +129,14 @@ const doc = new jsPDF();
                 <AiOutlineCloudUpload className='text-5xl m-auto text-purple-700' />
                 <p className='font-bold'>Click or drag your excel file to upload</p>   
 
-                <input type="file" name="file" onChange={uploadFile} className='hidden' ref={fileRef} />
+                <input type="file" name="file"  accept=".xlsx,.xls" onChange={uploadFile} className='hidden' ref={fileRef} />
 
                 <p className='text-[#989797]'> XLSX / XLS (Max 5MB)</p> 
         
             </div>
         {
          files.length > 0 ? files.map((file,idx) => {
-          return <div key={idx} className='rounded-md  border-2 mt-[2em]  flex flex-row gap-[1em]  border-gray-200 justify-between  '>
+          return <div key={idx} className='rounded-md  border-2 mt-[2em]  flex flex-row gap-[1em]  border-gray-200 justify-between '>
             <div className="flex gap-[1em] pl-[1em] lg:pl-[2em] py-[1em] " >
                 <PiMicrosoftExcelLogoFill className='text-green-700 text-4xl kg:text-3xl' />
                 <div className='flex flex-col'>

@@ -3,8 +3,9 @@ import React, {useState} from 'react'
 
 import DashboardNav from '../../components/DashboardNav'
 import UploadLogo from '@/app/components/UploadLogo'
+import Link from 'next/link'
 export default function Invoices() {
-      const [invoices,setInvoices] = useState<Array>([])
+      const [invoices,setInvoices] = useState<Array<any>>([])
   return (
       <div>
             <DashboardNav/>
@@ -18,7 +19,11 @@ export default function Invoices() {
              {
                 invoices.length > 0? 
                     ''
-                    : <p className='text-[#c5c5c5] text-center my-[2em]'>No Invoice made yet</p>
+                    : <div className='inline-flex gap-2 justify-center my-[12em]'>
+
+                        <p className='text-[#c5c5c5] '>No Invoice made yet</p>
+                        <Link href='/Upload' className='text-blue-300'>Upload an invoice</Link>
+                    </div>
              }
     
         </div>
