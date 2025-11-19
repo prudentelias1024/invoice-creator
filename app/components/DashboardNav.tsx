@@ -113,11 +113,11 @@ export default function Navbar() {
       
   
          
-           <Link href='/dashboard/profile' className="w-full h-[3em] px-[1em] pt-[1em] pb-[2em]  inline-flex gap-[1em] lg:mt-[4em]'>
+           <Link href='/dashboard/clients' className="w-full h-[3em] px-[1em] pt-[1em] pb-[2em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
       <FaUser className='text-xl'/>
-      Profile
+      Clients
         
            
      </Link>
@@ -152,6 +152,9 @@ export default function Navbar() {
   : ' '
   
 }
+  {/* <p className='bg-blue-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Business</p> */}
+  <p className='bg-purple-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Pro</p>
+  
   </div>
    <FaArrowRight className='text-[rgba(100,116,139,1)] mt-[.75em] ml-[1em]'/>
     </div>

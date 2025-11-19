@@ -18,7 +18,7 @@ function Login() {
               <button  className='bg-white border inline-flex rounded-md p-[.75em]  text-black lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1em]'>
                          <FcGoogle className='text-xl'/>
 
-                         <p className='text-xs lg:text-base m-auto font-bold '>Continue with Google</p>
+                         <p className='text-xs lg:text-sm m-auto font-bold '>Continue with Google</p>
                       
                          </button>
           
@@ -44,7 +44,7 @@ function Login() {
                          <p className='m-auto font-bold '>Continue with Email</p>
                       
                          </button>
-            <div className="inline-flex mb-[2em] gap-[.25em] ml-[5em] lg:ml-[10em]">
+            <div className="inline-flex mb-[2em] gap-[.25em] ml-[5em] lg:ml-[8em]">
                 <p>Not a User?</p>
                 <Link href='/Auth/Register' className='text-purple-500'>Signin</Link>
             </div>
