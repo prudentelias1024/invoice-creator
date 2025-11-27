@@ -13,11 +13,9 @@ interface User  {
     email: string,
     plan: string
 }
-export default function Navbar() {
+export default function Navbar({user}) {
   const [openSideNav, setOpenSideNav] = useState<Boolean>(false)
-  const [currentUser, setCurrentUser] = useState<User>({   fullname: 'Prudent Elias',
-    email: '',
-    plan: ''})
+
   
   const logout = () => {
 
@@ -113,7 +111,7 @@ export default function Navbar() {
       
   
          
-           <Link href='/dashboard/clients' className="w-full h-[3em] px-[1em] pt-[1em] pb-[2em]  inline-flex gap-[1em] lg:mt-[4em]'>
+           <Link href='/Dashboard/clients' className="w-full h-[3em] px-[1em] pt-[1em] pb-[2em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
       <FaUser className='text-xl'/>
@@ -133,9 +131,9 @@ export default function Navbar() {
       
        <div className='rounded-full inline-flex bg-purple-600 w-fit h-fit p-[0.5em] font-bold  text-base text-white'>
 {
-  currentUser !== null?
+  user !== null?
     <div>
-          <p className="">{currentUser.fullname.split(' ')[0][0]}{currentUser.fullname.split(' ')[1][0]}</p>
+          <p className="">{user.full_name.split(' ')[0][0]}{user.full_name.split(' ')[1][0]}</p>
           
           
     </div>
@@ -147,13 +145,13 @@ export default function Navbar() {
  <p className='text-xs text-[rgba(100,116,139,1)]'>Welcome back</p>
 {
   
-  currentUser !== null?
-  <p className="">{currentUser.fullname.split(' ')[0]}</p>
+  user !== null?
+  <p className="">{user.full_name.split(' ')[0]}</p>
   : ' '
   
 }
   {/* <p className='bg-blue-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Business</p> */}
-  <p className='bg-purple-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Pro</p>
+  <p className='bg-purple-500 font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]'>Pro</p>
   
   </div>
    <FaArrowRight className='text-[rgba(100,116,139,1)] mt-[.75em] ml-[1em]'/>

@@ -1,4 +1,5 @@
 export interface FileInterface  {
+
   lastModifiedTime: Number,
   name: String,
   size: Number,

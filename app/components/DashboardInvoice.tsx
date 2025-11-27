@@ -6,8 +6,8 @@ function DashboardInvoice() {
     const [invoices,setInvoices] = useState<Array<string>>([])
   return (
     <div>
-
-        <p className='font-bold text-lg  ml-[.5em] mt-[3em]'>Invoices</p>   
+         <p className='font-bold text-lg  ml-[.5em] mt-[3em]'>Invoices</p>   
+        
 
              {
                 invoices.length > 0? 

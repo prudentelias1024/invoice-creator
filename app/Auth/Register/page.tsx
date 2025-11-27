@@ -1,15 +1,47 @@
 'use client'
 import Link from 'next/link'
-import React , {useRef} from 'react'
+import React , {useEffect, useRef} from 'react'
 import Image from 'next/image'
 import { AiTwotoneFileText } from 'react-icons/ai'
 import { MdElectricBolt, MdOutlineElectricBolt } from 'react-icons/md'
 import { IoRocket } from 'react-icons/io5'
-
+import  client from '@/lib/supabase/server'
+import { useRouter } from 'next/navigation'
+import { Toaster ,toast} from 'sonner'
 function Register() {
-    const fullnameRef = useRef(null)
+    const router = useRouter()
+    const fullnameRef = useRef<string>(null)
+    const emailRef = useRef<string>(null)
+    const passwordRef = useRef<string>(null)
+
+
+    const signUp = async() => {
+      const fullname = fullnameRef.current.value  
+      const email = emailRef.current.value  
+      const password = passwordRef.current.value
+     
+      const {data, error} = await client.auth.signUp({
+         email, password, options: {
+          data: {
+            full_name: fullname
+          }
+         }
+      })
+      if(data){
+        toast.success('Signed you up successfully !!!!')
+        setTimeout(() => {
+          router.push('/Auth/Login')
+        }, 3000);
+      }
+      if(error){
+        toast.error('Cannot sign you in. Try again')
+      }
+    }
+
+  
   return (
     <div className='flex lg:flex-row-reverse flex-col-reverse lg:gap-0 gap-[3em] mb-[3em] '>
+    <Toaster />
         <div className=' pt-[5%] text-black flex flex-col gap-[2em]  pl-[2em] w-full lg:w-1/2 px-[3.5em]'>
 
       <p className='font-bold text-4xl lg:ml-[1.25em]'>Make your Invoice fast with Invoicely.</p>
@@ -60,7 +92,6 @@ function Register() {
           <p>Join these and other </p> <p className='font-bold'>100+</p> <p> Users now </p>
           
           </div>
-
     <div className="email_input ml-[1em] mt-[1em] flex flex-col lg:ml-[4em] ">
           
       
@@ -70,17 +101,17 @@ function Register() {
     <div className="email_input ml-[1em] flex flex-col lg:ml-[4em] ">
           
            
-           <input ref={fullnameRef} className="w-[90%] lg:w-[80%]  mt-[.5em] mb-[.5em] h-[3em] border p-4  font-normal  border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="text" name="email" placeholder='Email'/>
+           <input ref={emailRef} className="w-[90%] lg:w-[80%]  mt-[.5em] mb-[.5em] h-[3em] border p-4  font-normal  border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="text" name="email" placeholder='Email'/>
          </div>
 
     <div className="email_input ml-[1em] flex flex-col lg:ml-[4em] ">
           
            
       
-           <input ref={fullnameRef} className="w-[90%] lg:w-[80%]  mt-[.5em] mb-[.5em] h-[3em] border p-4  font-normal border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="text" name="username" placeholder='Password'/>
+           <input ref={passwordRef} className="w-[90%] lg:w-[80%]  mt-[.5em] mb-[.5em] h-[3em] border p-4  font-normal border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="password" name="username" placeholder='Password'/>
          </div>
 
-             <button  className='bg-purple-500 inline-flex rounded-md p-[.75em]  text-white lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1.5em]'>
+             <button onClick={signUp}  className='bg-purple-500 inline-flex rounded-md p-[.75em]  text-white lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1.5em]'>
                          
                          <p className='m-auto font-bold '>Join Invoicely</p>
                       
@@ -90,6 +121,7 @@ function Register() {
                 <p>Already joined?</p>
                 <Link href='/Auth/Login' className='text-purple-500'>Login</Link>
             </div>
+            
         </div>
     </div>
   )

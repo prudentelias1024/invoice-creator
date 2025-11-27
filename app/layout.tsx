@@ -2,26 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { AuthProvider } from "./components/Context/AuthProvider";
 const thiccboi = localFont({
   src: './fonts/thiccboi/THICCCBOI-Regular.woff2'
 })
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,15 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-
+   
     <html lang="en">
       <body
-        className={`${thiccboi.className} ${geistMono} antialiased`}
+        className={`${thiccboi.className}  antialiased`}
         >
+
+      <AuthProvider >
         {children}
+        </AuthProvider>
       </body>
     </html>
-        </ClerkProvider>
   );
 }
