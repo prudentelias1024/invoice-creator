@@ -21,7 +21,8 @@ export default function Assets() {
   }
   useEffect(() => {
    getLogo()
-  },[loading, newLogoUploaded])
+   console.log(loading)
+   },[loading, newLogoUploaded])
 
   return (
     <div>
@@ -32,29 +33,38 @@ export default function Assets() {
         ''
       }
            
-        <div className="assets flex  flex-col ml-[15em]">
+        <div className="assets flex  flex-col ml-[1em] pt-[3em] lg:ml-[15em]">
             <UploadLogo setLogo={setNewLogoUploaded}/>
         <div className='flex flex-col'>
              <p className='font-bold lg:ml-[3em] mt-[1.5em]'>Logos</p>   
-            <div className='grid grid-cols-4 justify-around ml-[2.2em] pt-[1em]'>
             {
-               logo.length > 0 ?
-               !loading? 
-                logo.map((image,idx) => {
-                return <img key={idx} src={image.asset_url} className='w-[13em] h-[10em] border-gray-200 border rounded-md mx-auto mt-[2em]' alt='logo' ></img>
-                           
-                })
-
-                : <>
+              logo.length == 0 && !loading   ?
+               <p className=' text-[#c5c5c5] m-auto text-center my-[2em]'>No logo uploaded yet</p>
+            :''
+              }
+            <div className='grid lg:grid-cols-4 grid-cols-3 justify-around lg:ml-[2.2em] pt-[1em] mb-[3em]'>
+            {
+              !loading && logo.length> 0? 
+              logo.map((image,idx) => {
+                return <img key={idx} src={image.asset_url} className='lg:w-[13em]  w-[8em] h-[6em] object-cover lg:h-[10em] border-gray-200 border rounded-md mx-auto mt-[2em]' alt='logo' ></img>
+                
+              }):
+              ''
+            }
+            </div>
+            {
+                  loading && logo.length<1?
+                <div className='lg:w-[90%] grid lg:grid-cols-4 lg:pl-[3em] grid-cols-3 flex-row gap-[1em] lg:gap-[2em]'>
                 <ImageSkeleton/>
               <ImageSkeleton/>
               <ImageSkeleton/>
-              <ImageSkeleton/>
-                </>
+              <ImageSkeleton />
+         </div>
+            :''       
               
-               : <p className=' text-[#c5c5c5] m-auto text-center my-[2em]'>No logo uploaded yet</p>
-              }
-              </div>
+            }
+          
+            
     
         </div>
 

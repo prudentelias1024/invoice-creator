@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ImageSkeleton() {
   return (
-    <div className='w-[13em] h-[10em] border rounded-md bg-gray-200 animate-pulse border-gray-300'>
+    <div className='lg:w-[13em] w-[6em] h-[6em] lg:h-[10em] border rounded-md bg-gray-200 animate-pulse border-gray-300'>
 
              <svg
           className="w-10 h-10 text-gray-100 mx-auto mt-[30%] align-middle dark:text-gray-600"

@@ -52,17 +52,17 @@ export default function UploadLogo(setLogo) {
  
   return (
    <div>
-    <p className="font-bold mt-[2em] lg:ml-[3em]">Upload Logo</p>
+    <p className="font-bold mt-[2em] ml-[1em] lg:ml-[3em]">Upload Logo</p>
       <Toaster/>
         {
           filesizeError !== ''?
-        <div className='text-red-500 ml-[3em] inline-flex gap-1 relative top-[1.5em]'>
+        <div className='text-red-500 lg:*:ml-[3em] inline-flex gap-1 relative top-[1.5em]'>
           <AiFillWarning/>
           <p className=" text-xs font-semibold">{filesizeError}</p>
         </div>:''
         }
 
-        <div onClick={clickUpload} className="flex flex-col gap-[1em] border-3 border-gray-200 border-dashed  rounded-md p-[2em] mt-[2em] ml-[3em] border-spacing-x-[2em] w-[70%] text-center">
+        <div onClick={clickUpload} className="flex flex-col gap-[1em] border-3 border-gray-200 border-dashed  rounded-md p-[2em] mt-[2em] lg:ml-[3em] border-spacing-x-[2em] w-[95%] lg:w-[70%] text-center">
                     <AiOutlineCloudUpload className='text-5xl m-auto text-purple-700' />
                     <p className='font-bold'>Upload a logo for custom invoice</p>   
     
