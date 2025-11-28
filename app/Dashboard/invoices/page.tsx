@@ -6,7 +6,10 @@ import UploadLogo from '@/app/components/UploadLogo'
 import Link from 'next/link'
 import Modal from 'react-modal'
 import Upload from '@/app/components/Upload'
+import { useAuth } from '@/app/components/Context/AuthProvider'
 export default function Invoices() {
+  const {user, session} = useAuth()
+   
  useEffect(() => {
     Modal.setAppElement('#invoices')
  },[])
@@ -38,7 +41,7 @@ const customStyles = {
   }
     return (
       <div id='invoices'>
-            <DashboardNav/>
+            <DashboardNav user={user.user_metadata}/>
     
      
     

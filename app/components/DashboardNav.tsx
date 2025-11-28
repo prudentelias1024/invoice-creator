@@ -131,7 +131,7 @@ export default function Navbar({user}) {
       
        <div className='rounded-full inline-flex bg-purple-600 w-fit h-fit p-[0.5em] font-bold  text-base text-white'>
 {
-  user !== null?
+  user !== undefined?
     <div>
           <p className="">{user.full_name.split(' ')[0][0]}{user.full_name.split(' ')[1][0]}</p>
           
@@ -145,7 +145,7 @@ export default function Navbar({user}) {
  <p className='text-xs text-[rgba(100,116,139,1)]'>Welcome back</p>
 {
   
-  user !== null?
+  user !== undefined?
   <p className="">{user.full_name.split(' ')[0]}</p>
   : ' '
   

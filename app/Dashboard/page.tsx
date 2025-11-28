@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import DashboardNav from '../components/DashboardNav'
 import DashboardDetails from '../components/DashboardDetails'
 import DashboardInvoice from '../components/DashboardInvoice'
@@ -8,10 +8,17 @@ import DashboardAssets from '../components/DashboardAssets'
 import { useAuth } from '@/app/components/Context/AuthProvider'
 function Dashboard() {
   const {user, session} = useAuth()
-  console.log(user)
+  useEffect(() => {
+
+  }, [user])
+ 
   return (
     <div className='flex flex-row'>
+      {
+      user !== null?
       <DashboardNav user={user.user_metadata}/>
+      :''
+      }
       <div className="flex flex-col lg:ml-[15em]">
 
       <div className=" pt-[2em] gap-[1em] grid grid-cols-4 lg:mr-[3em]">
