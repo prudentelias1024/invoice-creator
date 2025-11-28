@@ -2,26 +2,34 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-export const finerInvoice = (headers,docu) => {
+import thiccboi from './thiccboi.js'
+
+export const finerInvoice = (headers,docu,base64Image) => {
+   
     const doc = new jsPDF();
+    doc.addFileToVFS("thiccboi.ttf", thiccboi);
+    doc.addFont("thiccboi.ttf", "thiccboi", "normal");
+    doc.setFont("thiccboi");
      // --- HEADER ---
       doc.setFontSize(30);
       const pagewidth = doc.internal.pageSize.width;
       const pageHeight = doc.internal.pageSize.height;
-      doc.text("Invoice", 13, 15);
+      doc.addImage(base64Image, 'PNG', 13, 8, 25,25)
+   
+      doc.text("Invoice", 13, 40);
      
       
     
     
       doc.setFontSize(10);
-      doc.text("Billed to:", 14, 28);
-      doc.text("lorem ipsum LTD:", 14, 34);
-      doc.text("34, Campbell Street,Lagos State", 14, 40);
+      doc.text("Billed to:", 14, 50);
+      doc.text("lorem ipsum LTD:", 14, 56);
+      doc.text("34, Campbell Street,Lagos State", 14, 62);
      
       doc.setFontSize(10);
-      doc.text("Billed From:",  140, 28);
-      doc.text("lorem ipsum LTD:", 140, 34);
-      doc.text("34, Campbell Street,Lagos State",  140, 40);
+      doc.text("Billed From:",  140, 50);
+      doc.text("lorem ipsum LTD:", 140, 56);
+      doc.text("34, Campbell Street,Lagos State",  140, 62);
      
     
       // --- AUTOTABLE ---
@@ -29,14 +37,15 @@ export const finerInvoice = (headers,docu) => {
         head: [headers],
         theme: 'plain',
         body: docu,
-        startY: 45,
+        startY: 65,
         styles: {
           fontSize: 10,
           halign: "left",
+          font: 'thiccboi'
         },
         
         headStyles: {
-    
+          font: 'thiccboi', 
           fillColor: [204,204,204], // Purple header
           textColor: 255,
         },

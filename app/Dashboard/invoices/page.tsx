@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Modal from 'react-modal'
 import Upload from '@/app/components/Upload'
 import { useAuth } from '@/app/components/Context/AuthProvider'
+import { FaAngleRight } from 'react-icons/fa'
 export default function Invoices() {
   const {user, session} = useAuth()
    
@@ -41,7 +42,11 @@ const customStyles = {
   }
     return (
       <div id='invoices'>
+        {
+          user !== null?
             <DashboardNav user={user.user_metadata}/>
+            : ''
+        }
     
      
     
@@ -77,7 +82,20 @@ const customStyles = {
                     </div>
              }
     
+        {/* Show custom invoices here */}
+         <div>
+             <div className="inline-flex">
+
+        <p className='font-bold text-lg  ml-[.5em] mt-[1em]'> Ready to use invoices</p> 
+       <Link href="/Dashboard/assets">
+       <FaAngleRight className='ml-[.75em] mt-[1.55em]'/>  
+       </Link> 
+          </div>
+        </div>  
         </div>
+
+       
+
                     </div>
   
      

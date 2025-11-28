@@ -44,7 +44,7 @@ function DashboardAssets() {
                     : <div className='inline-flex gap-2 justify-center my-[4em]  lg:mx-[15em]'>
 
                         <p className='text-[#c5c5c5] '>No asset uploaded yet</p>
-                        <Link href='/D' className='text-blue-500'>Upload an asset</Link>
+                        <Link href='/Dashboard/assets' className='text-blue-500'>Upload an asset</Link>
                     </div>
              }
              </div>

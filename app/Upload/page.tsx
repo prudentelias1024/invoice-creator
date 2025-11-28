@@ -3,17 +3,19 @@ import React, { useState, useRef, useEffect, RefObject } from 'react'
 import Navbar from '../components/Navbar'
 import { AiOutlineCloudUpload } from 'react-icons/ai'
 import { PiMicrosoftExcelLogoFill } from 'react-icons/pi'
-import NextNProgress from 'nextjs-progressbar';
 import { MdDeleteOutline } from 'react-icons/md'
 import ProgressBar from '@ramonak/react-progress-bar'
 import * as XLSX from 'xlsx'
 import Image from 'next/image'
 import { basicInvoice } from "../Invoices/Basic";
 import { finerInvoice } from "../Invoices/Finer";
+import { useAuth } from '../components/Context/AuthProvider'
+
 const Upload = () =>  {
+  const {user, session} = useAuth() 
  
  
-  const [uploadInfo, setUploadInfo] = useState(null)
+ const [uploadInfo, setUploadInfo] = useState(null)
  const [files, setFiles] = useState<Array<FileInterface>>([])
  const [fileExt, setFileExt] = useState('')
  const [filename, setFileName] = useState('')
@@ -28,6 +30,18 @@ const Upload = () =>  {
  const clickUpload = () => {
    fileRef.current.click()
  }
+
+ const  imageUrlToBase64 = async(url) => {
+  const res = await fetch(url);
+  const blob = await res.blob();
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result); // returns full base64 string
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
  
  const uploadFile = (event:React.ChangeEvent<HTMLInputElement>) => {
   setUploadedFile(true)
@@ -95,21 +109,27 @@ const Upload = () =>  {
  }
 
 
-const previewPDF = () => {
-const doc = makePDF()
+const previewPDF = async() => {
+const doc = await makePDF()
 const pdfBlob = doc.output("blob");
 const url = URL.createObjectURL(pdfBlob);
 setPreview(true)
 setPreviewData(url)
 }
 
-const downloadPDF = () => {
-   const doc = makePDF()
+const downloadPDF = async() => {
+   const doc = await makePDF()
+   console.log(doc)
    doc.save("invoice.pdf")
 }
 
-const makePDF = () => {
-return finerInvoice(headers,docu)
+const makePDF = async() => {
+const static_url = "https://uutgahcujgkdyqnhmkww.supabase.co/storage/v1/object/public/logo/8bcc11e2-75df-49e9-a983-c72f8a6b6dcb/%201764291866042-logo.png"
+const base64Image = await imageUrlToBase64(static_url)
+  
+
+return finerInvoice(headers,docu, base64Image)
+// return basicInvoice(headers,docu)
 
 }
 

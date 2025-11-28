@@ -2,15 +2,17 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-export const basicInvoice = (headers,docu) => {
+
+export const basicInvoice = async(headers,docu) => {
     const doc = new jsPDF();
-     // --- HEADER ---
+
+    // --- HEADER ---
       doc.setFontSize(30);
       doc.setFont("THICCCBOI-Regular")
       const pagewidth = doc.internal.pageSize.width;
       const pageHeight = doc.internal.pageSize.height;
+
       doc.text("Invoice", 13, 15);
-     
       //from
     
     
