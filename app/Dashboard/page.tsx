@@ -36,7 +36,7 @@ function Dashboard() {
       }
       <div className="flex flex-col lg:ml-[15em]">
 
-      <div className=" gap-[1em] grid grid-cols-2 pt-[6em] pl-[1em] lg:pl-0 lg:pt-0 lg:grid-cols-4 lg:mr-[3em]">
+      <div className=" gap-[1em] grid grid-cols-2 pt-[6em] pl-[1em] lg:pl-0 lg:pt-[2em] lg:grid-cols-4 lg:mr-[3em]">
         <DashboardDetails color="white" details='0' title='Total invoices made'/>
         <DashboardDetails color="white" details='0' title='Invoice ( in 30 days ) '/>
         <DashboardDetails color="white" details='0' title='Total Mail sent '/>
