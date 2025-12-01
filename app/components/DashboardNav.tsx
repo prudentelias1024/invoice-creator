@@ -40,25 +40,27 @@ export default function Navbar({user}) {
 
         
       <MdDashboard className='text-2xl '/>
-            <Link href='/dashboard/home'>Dashboard</Link>
+            <Link href='/Dashboard'>Dashboard</Link>
       </div>
       
       <div className='inline-flex gap-[1em]'>
         <FaCreativeCommonsBy className='text-3xl'/>
-            <Link href='/dashboard/Pay'>My logo</Link>
+            <Link href='/Dashboard/assets'>My assets</Link>
       </div>
 
     
       <div className='inline-flex gap-[1em]'>
-        <FaMoneyBill className='text-3xl'/>
-            <Link href='/dashboard/Payments/'>Transaction History</Link>
-        </div>
-      
-      
-      <div className='inline-flex gap-[1em]'>
         <FaUser className='text-3xl'/>
-            <Link href='/dashboard/Profile/'>Profile </Link>
+            <Link href='/Dashboard/invoices/'>Invoices </Link>
         </div>
+
+
+      <div className='inline-flex gap-[1em]'>
+        <FaMoneyBill className='text-3xl'/>
+            <Link href='/Dashboard/clients/'>Clients</Link>
+        </div>
+      
+      
 
               
 

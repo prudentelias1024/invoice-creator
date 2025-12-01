@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
 import { AuthProvider } from "./components/Context/AuthProvider";
+import ReduxProvider from "./components/Context/ReduxProvider";
 const thiccboi = localFont({
   src: './fonts/thiccboi/THICCCBOI-Regular.woff2'
 })
@@ -26,7 +27,10 @@ export default function RootLayout({
         >
 
       <AuthProvider >
+        <ReduxProvider>
+
         {children}
+        </ReduxProvider >
         </AuthProvider>
       </body>
     </html>
