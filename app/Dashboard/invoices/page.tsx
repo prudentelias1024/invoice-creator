@@ -24,7 +24,7 @@ const customStyles = {
     bottom: 'auto',
     paddingRight: '12.5%',
     width: '70%',
-    height: '70%',
+    height: '65%',
     transform: 'translate(-50%, -50%)',
   },
 };
@@ -78,7 +78,7 @@ const customStyles = {
                : <div className='inline-flex gap-2 justify-center my-[12em]'>
 
                         <p className='text-[#c5c5c5] '>No Invoice made yet</p>
-                        <Link href='/Upload' className='text-blue-300'>Upload an invoice</Link>
+                        <Link href='/Dashboard/invoices/Upload' className='text-blue-300'>Upload an invoice</Link>
                     </div>
              }
     

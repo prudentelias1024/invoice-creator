@@ -28,7 +28,7 @@ export default function Assets() {
     <div>
       {
         user!== null?
-        <DashboardNav user={user.user_metadata}/>: 
+        <DashboardNav fullNav={true} user={user.user_metadata}/>: 
 
         ''
       }

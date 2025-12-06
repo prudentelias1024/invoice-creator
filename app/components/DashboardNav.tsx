@@ -13,7 +13,7 @@ interface User  {
     email: string,
     plan: string
 }
-export default function Navbar({user}) {
+export default function Navbar({user, fullNav}) {
   const [openSideNav, setOpenSideNav] = useState<Boolean>(false)
 
   
@@ -73,15 +73,20 @@ export default function Navbar({user}) {
       }
             </div>
     
-    <div className=' bg-white fixed h-screen hidden w-[15em]  py-[1Em] px-[1.5em]  lg:flex flex-col gap-[3em]  '>
+    <div className={fullNav?
+    ' bg-white fixed h-screen hidden w-[15em]  py-[1em] px-[1.5em]  lg:flex flex-col gap-[3em]  ':
+       'bg-white fixed h-screen hidden  py-[1em] px-[1.5em]  lg:flex flex-col gap-[3em] w-fit'}>
       
            <Link  href='/Dashboard' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
 ">
      
       <MdDashboard className='text-2xl  '/>
+       {fullNav? 
        <p className='mt-[.15em]'>
          Dashboard
         </p>
+        :''
+      }
          
            
      </Link>
@@ -90,9 +95,11 @@ export default function Navbar({user}) {
 ">
      
       <FaFileInvoice className='text-2xl'/>
-      <p className='mt-[.15em]'>
-        Invoices
-        </p>
+    {fullNav?
+       <p className='mt-[.15em]'>
+         Invoices
+        </p>: ''
+      }
         
            
      </Link>
@@ -103,7 +110,11 @@ export default function Navbar({user}) {
 ">
        <div className='inline-flex gap-[1em]'>
         <FaCreativeCommons className='text-2xl'/>
-            <p >Your Assets</p>
+        {fullNav? 
+       <p className='mt-0'>
+         Your assets
+        </p>: ''
+      }
         </div>
       
       
@@ -117,7 +128,11 @@ export default function Navbar({user}) {
 ">
      
       <FaUser className='text-xl'/>
-      Clients
+     {fullNav? 
+       <p className='mt-0'>
+         Clients
+        </p>:""
+      }
         
            
      </Link>
@@ -127,11 +142,14 @@ export default function Navbar({user}) {
 
       <div className='inline-flex gap-[1em] ml-[1em] cursor-pointer'>
         <MdLogout  className='text-xl text-[#64748b]'/>
-            <p onClick={logout} className='text-[#64748b]'>Logout</p>
+        {fullNav? 
+            <p onClick={logout} className='text-[#64748b]'>Logout</p>:''
+      }
     </div>
     <div className="profile flex flex-row gap-[1em]  -ml-[.5em]" >
       
-       <div className='rounded-full inline-flex bg-purple-600 w-fit h-fit p-[0.5em] font-bold  text-base text-white'>
+       <div className={fullNav? 'rounded-full inline-flex bg-purple-600 w-fit h-fit p-[0.5em] font-bold  text-base text-white':
+        ' ml-[1em] rounded-full inline-flex bg-purple-600 w-fit h-fit p-[0.5em] font-bold  text-base text-white'}>
 {
   user !== undefined?
     <div>
@@ -142,21 +160,31 @@ export default function Navbar({user}) {
           : ' '
 }
 </div>
-
+{
+  fullNav
+}
 <div className='flex flex-col'>
- <p className='text-xs text-[rgba(100,116,139,1)]'>Welcome back</p>
+  {
+    fullNav?
+    <p className='text-xs text-[rgba(100,116,139,1)]'>Welcome back</p> : ''
+  }
 {
   
-  user !== undefined?
+  user !== undefined && fullNav?
   <p className="">{user.full_name.split(' ')[0]}</p>
   : ' '
   
 }
   {/* <p className='bg-blue-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Business</p> */}
-  <p className='bg-purple-500 font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]'>Pro</p>
+  {
+    fullNav?
+    <p className='bg-purple-500 font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]'>Pro</p>:''
+  }
   
   </div>
+  {fullNav? 
    <FaArrowRight className='text-[rgba(100,116,139,1)] mt-[.75em] ml-[1em]'/>
+  :''}
     </div>
    
     </div>

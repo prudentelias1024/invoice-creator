@@ -2,10 +2,13 @@ import { createSlice, configureStore} from '@reduxjs/toolkit'
 
 const appSlice = createSlice({
     name: 'store',
-    initialState: { assets: []},
+    initialState: { assets: [], profileToInvoice:null},
    reducers: {
     updateAssets(state,action){
         state.assets = action.payload
+    },
+    updateInvoiceRecipient(state,action){
+        state.profileToInvoice = action.payload
     }
    } 
 })
