@@ -225,22 +225,14 @@ return finerInvoice(headers,docu)
         <div className="flex flex-col">
             <p className='font-bold'>{profileToInvoice.client_name}</p>
             <p className='text-gray-500'>{profileToInvoice.client_email}</p>
+            <p className='text-gray-500'>{profileToInvoice.client_address}</p>
         </div>
             </div>
             </div>
            
            :
-           
-            <select id="currency" className=" border border-gray-200 rounded-sm outline  p-[1em] h-[3.25em]">
-              <option value="USD">🇺🇸 USD — $</option>
-              <option value="EUR">🇪🇺 EUR — €</option>
-              <option value="GBP">🇬🇧 GBP — £</option>
-              <option value="JPY">🇯🇵 JPY — ¥</option>
-              <option value="CNY">🇨🇳 CNY — ¥</option>
-              <option value="INR">🇮🇳 INR — ₹</option>
-              <option value="NGN">🇮🇳 INR — ₹</option>
-              
-          </select> 
+          <p className='text-gray-500'>No Client information. Choose or create a client</p> 
+          
 
            }
           </div>
@@ -261,14 +253,14 @@ return finerInvoice(headers,docu)
           </div>
 
 
-
+{/* 
       <div className="billing_info flex flex-col gap-[1em]">
           <p className='font-bold text-xl'>Billing Information</p>
           
            <input  className="w-full  mt-[.5em]  h-[3em] border p-4  font-normal border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="text" name="billing_addr" placeholder='Company Name'/>
 
            <input  className="w-full  mt-[.5em]  h-[3em] border p-4  font-normal border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="text" name="billing_addr" placeholder='Billing Address'/>
-      </div>
+      </div> */}
   
    </div>
         </div>
