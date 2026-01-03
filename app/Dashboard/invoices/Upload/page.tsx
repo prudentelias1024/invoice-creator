@@ -48,7 +48,7 @@ const Upload = () =>  {
   });
 }
  
- const uploadFile = (event:React.ChangeEvent<HTMLInputElement>) => {
+ const uploadFile = async(event:React.ChangeEvent<HTMLInputElement>) => {
   setUploadedFile(true)
   setFiles([...fileRef.current.files])
   const reader = new FileReader();
@@ -60,7 +60,7 @@ const Upload = () =>  {
     const workbook = XLSX.read(base64, { type: "base64" });
     // console.log(workbook)
     const doc = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
-   
+    
     // console.log(doc)
     let tempkeys = []
     let tempHeaders = []
@@ -69,57 +69,64 @@ const Upload = () =>  {
     console.log(Object.entries(doc[0]).forEach((entry) =>{
         tempkeys.push(entry[0])
         tempHeaders.push(entry[1])
-    }));
-
-    
-    //keys are used to extract the rows from the wb
-    setKeys(tempkeys)
-    
-    //headers is the first row
-    setHeaders(tempHeaders)
-   
-    //turn workbook into array
-    let temp = []
-    const temp_wb = []
-    // console.log(doc)
-    doc.forEach((row,idx) => {
-
-      if(idx > 0 ){
+      }));
+      
+      
+      //keys are used to extract the rows from the wb
+      setKeys(tempkeys)
+      
+      //headers is the first row
+      setHeaders(tempHeaders)
+      
+      //turn workbook into array
+      let temp = []
+      const temp_wb = []
+      // console.log(doc)
+      doc.forEach((row,idx) => {
+        
+        if(idx > 0 ){
           tempkeys.forEach((key,idx) => {
             // console.log(key)
             if(row[key] == undefined){
-               temp.push('')
+              temp.push('')
             } else{     
               temp.push(row[key])
             }
           })
           
-           temp_wb.push(temp)
-           temp = []  
+          temp_wb.push(temp)
+          temp = []  
         }
       })
-
+      
       setDocu(temp_wb)
-     
-   
-
+      
+      
+      
     };
-    // console.log(workbook.Sheets[workbook.SheetNames[0]]);
-
-  reader.onerror = function (err) {
-    console.error("File error:", err);
-  };
-
-  reader.readAsDataURL(fileRef.current.files[0]); // convert → base64
- }
-
+    
+    reader.onerror = function (err) {
+      console.error("File error:", err);
+    };
+    
+    reader.readAsDataURL(fileRef.current.files[0]); // convert → base64
+    // await previewPDF()
+    
+    
+  }
+  
+  useEffect(() => {
+   if (uploadedFile) {
+     
+     previewPDF()
+   }
+  }, [docu,user, previewData])
 
 const previewPDF = async() => {
-const doc = await makePDF()
-const pdfBlob = doc.output("blob");
-const url = URL.createObjectURL(pdfBlob);
-setPreview(true)
-setPreviewData(url)
+  const doc = await makePDF()
+  const pdfBlob = await doc.output("blob").arrayBuffer()
+  setPreview(true)
+  setPreviewData(pdfBlob)
 }
 
 const downloadPDF = async() => {
@@ -129,20 +136,11 @@ const downloadPDF = async() => {
 }
 
 const makePDF = async() => {
-// const static_url = "https://uutgahcujgkdyqnhmkww.supabase.co/storage/v1/object/public/logo/8bcc11e2-75df-49e9-a983-c72f8a6b6dcb/%201764291866042-logo.png"
-// const base64Image = await imageUrlToBase64(static_url)
-  
-
 return finerInvoice(headers,docu)
-// return basicInvoice(headers,docu)
-
 }
 
 
 
- useEffect(() => {
-  previewPDF()
-}, [docu,user,preview])
 
 
   return (
@@ -241,7 +239,7 @@ return finerInvoice(headers,docu)
           <p className='font-bold text-xl'>Currency Information</p>
           <select id="currency" className=" border border-gray-200 rounded-sm outline  p-[1em] h-[3.25em]">
               <option value="USD">
-                <span className="fi fi-us">🇺🇸 USD — $</span></option>
+                🇺🇸 USD — $</option>
               <option value="EUR">🇪🇺 EUR — €</option>
               <option value="GBP">🇬🇧 GBP — £</option>
               <option value="JPY">🇯🇵 JPY — ¥</option>

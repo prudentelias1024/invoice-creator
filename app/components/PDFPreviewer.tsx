@@ -1,23 +1,56 @@
 'use client'
 import React, {useState, useEffect} from 'react'
-import * as pdfjsLib from "pdfjs-dist";
+import * as pdfjsLib from "../pdf.mjs";
+// import pdfWorker from "../pdf.worker.min.mjs";
+import { Fade  } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+import { log } from 'console';
 
-export default function PDFPreviewer({fileData}) {
+const spanStyle = {
+  padding: '10px',
+  background: '#efefef',
+  color: '#000000'
+  // padding: '10px',
+  // borderRadius:' 5px',
+  // fontSize: '20px',
+  // color: 'white',
+  // background: 'rgba(141, 174, 224, 0.5)',
+  // textAlign: 'center',
+}
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+const divStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundSize: 'cover',
+  height: '160vh',
+  marginTop: '1em',
+  marginLeft: '5em'
+  // display: 'flex',
+  // aligntItems: 'center',
+  // justifyContent: 'center',
+  // backgroundSize: 'cover',
+  // backgroundPosition: '50% 50%',
+  // backgroundRepeat: 'no-repeat',
+  // height: '100vh',
+}
+
+export default function PDFPreviewer({fileData }) {
   // pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(WorkerMessageHandler, import.meta.url).toString()
+  let tempPdf =[]
 
-  const [imgSrc, setImgSrc] = useState("");
-const renderImage = async () => {
+  const [imgSrc, setImgSrc] = useState(fileData);
+  const [pdfImages, setPdfImages] = useState([])
+  const [imageUpdated, setImageUpdated] = useState(false)
+const renderImage = async (pdf, pageNum) => {
 
-      // 1. Load the PDF from base64 or Uint8Array
-      const pdf = await pdfjsLib.getDocument({ data: fileData }).promise;
+   
+   
 
-      // 2. Get first page
-      const page = await pdf.getPage(1);
+    const page = await pdf.getPage(pageNum);
 
       // 3. Define how big the preview will be
-      const viewport = page.getViewport({ scale: 2 });
+      const viewport = page.getViewport({ scale: 20});
 
       // 4. Create an invisible canvas
       const canvas = document.createElement("canvas");
@@ -26,32 +59,74 @@ const renderImage = async () => {
       canvas.width = viewport.width;
       canvas.height = viewport.height;
 
-      // 5. Render the PDF page onto the canvas
+      // 5. Render  the PDF page onto the canvas
       await page.render({
         canvasContext: ctx,
         viewport: viewport,
-      }).promise;
+      }).promise
 
       // 6. Convert canvas to PNG image URL
-      const imageUrl = canvas.toDataURL("image/png");
-      console.log(imageUrl)
-
+      const imageUrl = await canvas.toDataURL("image/png")
+     
+      
       // 7. Save PNG URL in React state
       setImgSrc(imageUrl);
+      if (pdfImages.length > 0) { 
+        setPdfImages([imageUrl, ...pdfImages])
+      } else {
+        setPdfImages([imageUrl])
+      }
+
+      setImageUpdated(true)
+     
     };
 
   useEffect(() => {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
+    
+    const loadPDF = async() => {
+      const pdf = await pdfjsLib.getDocument({ data: fileData }).promise
+
+      const no_of_pages = pdf.numPages
+      console.log(no_of_pages)
+  
+      for (let i = 1; i <= no_of_pages; i++) {
+        console.log('hi')
+        renderImage(pdf,i);
+      }
+  
+    }
+    console.log(fileData)
     console.log(imgSrc)
-    console.log('fileData',fileData)
-    renderImage();
+   
+   loadPDF()
+   console.log(pdfImages)
+  
+    // 1. Load the PDF from base64 or Uint8Array
   }, []);
 
   return (
-    <div className="w-full">
-      {imgSrc ? (
-        <img src={imgSrc} alt="PDF preview" className="w-full h-screen shadow " />
-      ) : (
-            <div className=' w-[90%] h-screen border rounded-md bg-gray-200 animate-pulse border-gray-300 ml-[7em] mt-[2em]'>
+    <div className="w-full h-screen ml-[2em]">
+      {/* {imgSrc !== ''  ?  */}
+       <Fade easing='ease'>
+         {pdfImages.length > 0 ? 
+         
+         pdfImages.map((slideImage, index)=> {
+           return (<div key={index}>
+             {/* <img src={slideImage} alt="Preview PDF" className="w-full h-full ml-[2em] pl-[6em] shadow " /> */}
+               <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage})` }}>
+             
+                <span style={spanStyle}>{"Page: "+ ++index}</span>
+            </div>
+             </div>)
+})
+         :'' 
+         }  
+        </Fade>
+     
+       
+            {/* <div className=' w-[90%] h-screen border rounded-md bg-gray-200 animate-pulse border-gray-300 ml-[7em] mt-[2em]'>
 
              <svg
           className="w-10 h-10 text-gray-100 mx-auto mt-[30%] align-middle dark:text-gray-600"
@@ -64,7 +139,7 @@ const renderImage = async () => {
         </svg>
     </div>
 
-      )}
+      } */}
     </div>
   );
 }

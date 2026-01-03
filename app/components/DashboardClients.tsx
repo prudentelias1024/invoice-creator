@@ -46,7 +46,7 @@ function DashboardClients() {
       {
      return <div key={idx} className={ idx == clients.length-1?
       "hidden w-full border rounded-b-2xl border-gray-200 ml-0 py-[1em] lg:grid grid-flow-col lg:grid-cols-5 gap-[.1em] mt-0 text-xs":
-      "hidden w-full border border-gray-2 00 ml-0 py-[1em] lg:grid grid-flow-col lg:grid-cols-5 gap-[.1em] mt-0 text-xs"
+      "hidden w-full border border-gray-2 00 ml-0 py-[1em] lg:grid grid-flow-col lg:grid-cols-5z gap-[.1em] mt-0 text-xs"
       
      }>
       <p className='ml-[4em]'>{client.client_title}</p>
