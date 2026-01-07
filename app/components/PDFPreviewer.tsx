@@ -39,14 +39,12 @@ export default function PDFPreviewer({fileData }) {
   // pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(WorkerMessageHandler, import.meta.url).toString()
   let tempPdf =[]
 
-  const [imgSrc, setImgSrc] = useState(fileData);
+  const [imgSrc, setImgSrc] = useState();
   const [pdfImages, setPdfImages] = useState([])
   const [imageUpdated, setImageUpdated] = useState(false)
-const renderImage = async (pdf, pageNum) => {
 
-   
-   
-
+const renderImage = async (pdf, pageNum, temp) => {
+   console.log(pageNum)
     const page = await pdf.getPage(pageNum);
 
       // 3. Define how big the preview will be
@@ -68,43 +66,31 @@ const renderImage = async (pdf, pageNum) => {
       // 6. Convert canvas to PNG image URL
       const imageUrl = await canvas.toDataURL("image/png")
      
-      
+      temp.push(imageUrl)
       // 7. Save PNG URL in React state
-      setImgSrc(imageUrl);
-      if (pdfImages.length > 0) { 
-        setPdfImages([imageUrl, ...pdfImages])
-      } else {
-        setPdfImages([imageUrl])
-      }
-
-      setImageUpdated(true)
+     
      
     };
-
-  useEffect(() => {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-
     
-    const loadPDF = async() => {
-      const pdf = await pdfjsLib.getDocument({ data: fileData }).promise
-
+ const loadPDF = async(file_data) => {
+      const pdf = await pdfjsLib.getDocument({ data: file_data }).promise
+      const temp_img = []
       const no_of_pages = pdf.numPages
-      console.log(no_of_pages)
-  
+     
       for (let i = 1; i <= no_of_pages; i++) {
-        console.log('hi')
-        renderImage(pdf,i);
+      
+        await renderImage(pdf,i, temp_img);
       }
-  
+
+      setPdfImages(temp_img)
+      setImageUpdated(true)
     }
-    console.log(fileData)
-    console.log(imgSrc)
-   
-   loadPDF()
-   console.log(pdfImages)
-  
+  useEffect(() => {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`; 
+  loadPDF(fileData)
+  console.log(pdfImages)
     // 1. Load the PDF from base64 or Uint8Array
-  }, []);
+  }, [fileData, imageUpdated]);
 
   return (
     <div className="w-full h-screen ml-[2em]">
@@ -113,6 +99,7 @@ const renderImage = async (pdf, pageNum) => {
          {pdfImages.length > 0 ? 
          
          pdfImages.map((slideImage, index)=> {
+        
            return (<div key={index}>
              {/* <img src={slideImage} alt="Preview PDF" className="w-full h-full ml-[2em] pl-[6em] shadow " /> */}
                <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage})` }}>

@@ -112,6 +112,7 @@ const Upload = () =>  {
     reader.readAsDataURL(fileRef.current.files[0]); // convert → base64
     // await previewPDF()
     
+    //refresh state
     
   }
   
