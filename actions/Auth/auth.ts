@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/browser-client";
+import { createClient } from "/lib/supabase/browser-client";
 
 interface FormData {
   email: string;
