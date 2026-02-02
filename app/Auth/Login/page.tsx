@@ -34,10 +34,10 @@ function Login() {
   return (
     <div className='mb-[2em]'>
        <Toaster />
-        <Image src='/logo.png' className='mx-auto mt-[5em]' alt='logo' width='85' height='85'/>
-        
+
         <div className='flex flex-col rounded-sm pt-[2em] border-[#ccc] 
-        shadow-md w-[95%] lg:w-1/3 m-auto h-[30em] '>
+        shadow-md w-[95%] lg:w-1/3 m-auto h-[37em] '>
+        <Image src='/sp.png' className='mx-auto' alt='logo' width='120' height='120'/>
             <p className='m-auto lg:ml-[8.5em] font-bold text-xl'>Sign in</p>
               <button  className='bg-white border inline-flex rounded-md p-[.75em]  text-black lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1em]'>
                          <FcGoogle className='text-xl'/>

@@ -44,7 +44,7 @@ function Register() {
     <Toaster />
         <div className=' pt-[5%] text-black flex flex-col gap-[2em]  pl-[2em] w-full lg:w-1/2 px-[3.5em]'>
 
-      <p className='font-bold text-4xl lg:ml-[1.25em]'>Make your Invoice fast with Invoicely.</p>
+      <p className='font-bold text-4xl lg:ml-[1.25em]'>Make your Invoice fast with Invora.</p>
 
       <div className='flex flex-col '>
 
@@ -75,8 +75,8 @@ function Register() {
         </div>
         <div className='form flex flex-col w-full lg:w-1/2'>
         
-          <Image src='/logo.png' className='mx-auto mt-[5em]' alt='logo' width='85' height='85'/>
-            <p className=' text-3xl font-black mt-[0em] mx-auto my-[1em]'>Join Invoicely</p>
+          <Image src='/sp.png' className='mx-auto mt-[5em]' alt='logo' width='150' height='120'/>
+            <p className=' text-3xl font-black mt-[0em] mx-auto my-[1em]'>Join Invora</p>
 
             {/* images */}
         <div className="images mx-auto -mt-[1em] flex flex-row">

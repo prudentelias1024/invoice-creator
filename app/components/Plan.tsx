@@ -11,7 +11,7 @@ interface Plans  {
 
 const Plan = (prices: Plans) => {
   return (
-    <div className='flex flex-col shadow-md text-left rounded-xl w-[20em] p-[2em] mb-[5em]'>
+    <div className='flex flex-col bg-gray-200 shadow-md text-left rounded-xl w-[20em] p-[2em] mb-[5em]'>
         <p className="plan_name float-left font-bold">{prices.name  }</p>
         <div className="price_fee inline-flex ">  <p className='text-2xl font-extrabold'>${prices.fee}</p> <p className='text-sm mt-[.5em] ml-[.5em]'>/mo</p></div>
         <button className={
