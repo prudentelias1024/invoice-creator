@@ -16,11 +16,13 @@ import Select from "react-select";
 import PDFPreviewer from '@/app/components/PDFPreviewer'
 import { useSelector } from 'react-redux'
 
+import {BounceLoader} from 'react-spinners'
 const Upload = () =>  {
   const {user, session} = useAuth() 
  
  const {profileToInvoice} = useSelector(state=>state)
  const [uploadInfo, setUploadInfo] = useState(null)
+ const [loading, setLoading] = useState(false)
  const [files, setFiles] = useState<Array<FileInterface>>([])
  const [fileExt, setFileExt] = useState('')
  const [filename, setFileName] = useState('')
@@ -36,6 +38,15 @@ const Upload = () =>  {
    fileRef.current.click()
  }
 
+ 
+const override: CSSProperties = {
+  display: "block",
+  margin: "auto",
+  borderColor: "purple",
+  color: "purple",
+  width: '100%'
+};
+
  const  imageUrlToBase64 = async(url) => {
   const res = await fetch(url);
   const blob = await res.blob();
@@ -50,6 +61,9 @@ const Upload = () =>  {
  
  const uploadFile = async(event:React.ChangeEvent<HTMLInputElement>) => {
   setUploadedFile(true)
+  
+  setLoading(true)
+
   setFiles([...fileRef.current.files])
   const reader = new FileReader();
  
@@ -119,8 +133,10 @@ const Upload = () =>  {
   useEffect(() => {
    if (uploadedFile) {
      
-     previewPDF()
+      previewPDF()
+      
    }
+   
   }, [docu,user, previewData])
 
 const previewPDF = async() => {
@@ -128,6 +144,8 @@ const previewPDF = async() => {
   const pdfBlob = await doc.output("blob").arrayBuffer()
   setPreview(true)
   setPreviewData(pdfBlob)
+
+  
 }
 
 const downloadPDF = async() => {
@@ -273,8 +291,21 @@ return finerInvoice(headers,docu)
           </div>
 
 {
-  previewData !== null?
-  <PDFPreviewer fileData={previewData}></PDFPreviewer>: ''
+  previewData !== null ?
+  <PDFPreviewer fileData={previewData} loadingState={setLoading}></PDFPreviewer>: 
+  loading ? <div className='mx-auto mt-[42.5%] ml-[56%]'>
+ 
+     <BounceLoader color={"#512bd4"}
+        loading={loading}
+        cssOverride={override}
+        size={50}
+        aria-label="Loading Spinner"
+        data-testid="loader">
+        </BounceLoader>
+
+        <p className='-ml-[1em]'>Converting.....</p>
+  </ div>
+         : <p className='m-auto mt-[15em] ml-[20%] text-[#989797] '>Invoice will be previewed here after uploading and conversion</p>
 }
         </div>
 

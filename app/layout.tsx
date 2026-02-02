@@ -7,6 +7,9 @@ import ReduxProvider from "./components/Context/ReduxProvider";
 const thiccboi = localFont({
   src: './fonts/thiccboi/THICCCBOI-Regular.woff2'
 })
+const saans = localFont({
+  src: './fonts/saans/SaansTRIAL-Regular.woff2'
+})
 
 
 export const metadata: Metadata = {
@@ -23,7 +26,7 @@ export default function RootLayout({
    
     <html lang="en">
       <body
-        className={`${thiccboi.className}  antialiased`}
+        className={`${saans.className}  antialiased`}
         >
 
       <AuthProvider >

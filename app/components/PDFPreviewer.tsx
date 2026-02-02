@@ -35,7 +35,7 @@ const divStyle = {
   // height: '100vh',
 }
 
-export default function PDFPreviewer({fileData }) {
+export default function PDFPreviewer({fileData, loadingState }) {
   // pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(WorkerMessageHandler, import.meta.url).toString()
   let tempPdf =[]
 
@@ -84,11 +84,23 @@ const renderImage = async (pdf, pageNum, temp) => {
 
       setPdfImages(temp_img)
       setImageUpdated(true)
+    
     }
+  const callLoadPDF = async() => {
+   try {
+     await loadPDF(fileData)
+
+   } finally{
+    setTimeout(() => {
+      
+      loadingState(true)
+    }, 3000);
+  }
+}
+
   useEffect(() => {
   pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`; 
-  loadPDF(fileData)
-  console.log(pdfImages)
+  callLoadPDF()
     // 1. Load the PDF from base64 or Uint8Array
   }, [fileData, imageUpdated]);
 

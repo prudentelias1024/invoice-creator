@@ -31,7 +31,7 @@ function Dashboard() {
     <div className='flex flex-row'>
       {
       user !== null?
-      <DashboardNav user={user.user_metadata}/>
+      <DashboardNav fullNav={true} user={user.user_metadata}/>
       :''
       }
       <div className="flex flex-col lg:ml-[15em]">

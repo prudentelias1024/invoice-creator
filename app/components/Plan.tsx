@@ -1,6 +1,7 @@
 import { features } from 'process'
 import React from 'react'
-import { GiCancel, GiCheckMark } from 'react-icons/gi'
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+
 
 interface Plans  {
     name: string,
@@ -10,9 +11,9 @@ interface Plans  {
 
 const Plan = (prices: Plans) => {
   return (
-    <div className='flex flex-col shadow-md text-left rounded-md w-[20em] p-[2em] mb-[5em]'>
-        <p className="plan_name float-left font-bold">Free</p>
-        <div className="price_fee inline-flex font-bold">  <p className='text-2xl'>${prices.fee}</p> <p className='text-sm mt-[.5em] ml-[.5em]'>/mo</p></div>
+    <div className='flex flex-col shadow-md text-left rounded-xl w-[20em] p-[2em] mb-[5em]'>
+        <p className="plan_name float-left font-bold">{prices.name  }</p>
+        <div className="price_fee inline-flex ">  <p className='text-2xl font-extrabold'>${prices.fee}</p> <p className='text-sm mt-[.5em] ml-[.5em]'>/mo</p></div>
         <button className={
             prices.name == "Free" ?
             "border rounded-md font-bold py-[.75em] text-sm mt-[1em]":
@@ -29,13 +30,13 @@ const Plan = (prices: Plans) => {
                 prices.features.map((feature, idx) => {
                     if(idx == 0){
                         return  <div key={idx} className="inline-flex gap-[.25em]">
-                <GiCheckMark className="text-purple-500"/>
+                <IoIosCheckmarkCircleOutline  className="text-purple-500"/>
                 <p className='text-sm ml-[1em] -mt-[.25em]'>{feature}</p>
             </div>
 
                     } else {
                        return <div key={idx} className="inline-flex gap-[.25em]">
-                <GiCheckMark className="text-purple-500"/>
+                <IoIosCheckmarkCircleOutline  className="text-purple-500"/>
                 <p className='text-sm -mt-[1.em] ml-[1.25em]'>{feature}</p>
             </div>
 

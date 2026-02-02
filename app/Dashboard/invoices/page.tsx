@@ -44,7 +44,7 @@ const customStyles = {
       <div id='invoices'>
         {
           user !== null?
-            <DashboardNav user={user.user_metadata}/>
+            <DashboardNav fullNav={true} user={user.user_metadata}/>
             : ''
         }
     

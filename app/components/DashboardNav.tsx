@@ -7,7 +7,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 // import { useSelector } from 'react-redux';
 import { BsClockHistory } from 'react-icons/bs';
 import Link from 'next/link';
-
+import Image from 'next/image'  
 interface User  {
     fullname: string,
     email: string,
@@ -27,6 +27,8 @@ export default function Navbar({user, fullNav}) {
   return (
     <>
      <div className='lg:hidden w-full  absolute bg-green-500 top-[1em] left-[1em] '>
+      
+    
 {
   !openSideNav ?
   <RxHamburgerMenu onClick={toggleNav} className='text-2xl lg:hidden absolute top-[1em] left-[1.5em]'/>
@@ -39,6 +41,7 @@ export default function Navbar({user, fullNav}) {
           <div className='inline-flex gap-[1em]'>
 
         
+
       <MdDashboard className='text-2xl '/>
             <Link href='/Dashboard'>Dashboard</Link>
       </div>
@@ -49,7 +52,7 @@ export default function Navbar({user, fullNav}) {
       </div>
 
     
-      <div className='inline-flex gap-[1em]'>
+      <div className='inline-flex gap-[1em]'> 
         <FaUser className='text-3xl'/>
             <Link href='/Dashboard/invoices/'>Invoices </Link>
         </div>
@@ -74,15 +77,17 @@ export default function Navbar({user, fullNav}) {
             </div>
     
     <div className={fullNav?
-    ' bg-white fixed h-screen hidden w-[15em]  py-[1em] px-[1.5em]  lg:flex flex-col gap-[3em]  ':
-       'bg-white fixed h-screen hidden  py-[1em] px-[1.5em]  lg:flex flex-col gap-[3em] w-fit'}>
-      
-           <Link  href='/Dashboard' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:mt-[4em]'>
+    ' bg-white fixed h-screen hidden w-[15em] -mt-[1.5em]  px-[1.5em]  lg:flex flex-col gap-[3em]  ':
+       'bg-white fixed h-screen hidden  py-[1em] px-[.5em]  lg:flex flex-col gap-[3em] w-fit'}>
+             
+    
+     <Image src='/sp.png' className='mt-[-1em] ml-[.5em] mb-[-4em] ' alt='logo' width='120' height='50'/>
+           <Link  href='/Dashboard' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:-mt-[5em]'>
 ">
      
       <MdDashboard className='text-2xl  '/>
        {fullNav? 
-       <p className='mt-[.15em]'>
+       <p className=''>
          Dashboard
         </p>
         :''

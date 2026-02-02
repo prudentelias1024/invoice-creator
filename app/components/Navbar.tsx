@@ -6,8 +6,8 @@ const Navbar = () => {
   return (
     <div className="flex flex-row justify-around lg:pl-[2em] lg:pt-[1em]">
         <div className="-ml-[5em] flex">
-            <Image src='/logo.png' className='-mt-[.5em]' alt='logo' width='75' height='75'/>
-            <p className='text-2xl text-blue-700 mt-[.5em]'>Invoicer</p>
+            <Image src='/sp.png' className='-mt-[4em]' alt='logo' width='180' height='180'/>
+            {/* <p className='text-2xl font-black text-black mt-[.5em]'>Invoicer</p> */}
         </div>
 
         <div className='hidden lg:flex  gap-[3em]'>
@@ -17,8 +17,8 @@ const Navbar = () => {
             <Link href={"/"}>About</Link>
         </div>
         <div className='hidden lg:flex -mt-[.25em] gap-[1.5em]'>
-        <Link href='/Auth/Login' className=' mt-2 text-purple-500'>Log in</Link> 
-        <Link href='/Auth/Register' className='bg-purple-500 text-white p-[.6em] rounded-md h-[3em]'>Try it for free</Link> 
+        <Link href='/Auth/Login' className=' mt-2 text-black'>Log in</Link> 
+        <Link href='/Auth/Register' className='bg-black text-white p-[.6em] rounded-md h-[3em]'>Try it for free</Link> 
         </div>
     </div>
   )

@@ -55,7 +55,7 @@ const  Clients = () => {
       Modal.setAppElement('#clients')
    },[user, created])
   return (
-    <div>
+    <div className='flex flex-row'>
   
       {
          
