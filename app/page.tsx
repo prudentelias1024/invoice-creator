@@ -4,6 +4,7 @@ import Navbar from '@/app/components/Navbar'
 import Hero from '@/app/components/Hero'
 import Pricing from "./components/Pricing";
 import CoreHero from './components/CoreHero';
+import Footer from './components/Footer';
 export default function Home() {
   return (
     <div className="">
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero/>
       <CoreHero/>
       <Pricing/>
+      <Footer/>
      </div>
   );
 }

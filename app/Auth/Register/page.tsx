@@ -57,7 +57,7 @@ function Register() {
 
        <div className='flex flex-col'>
 
-          <MdOutlineElectricBolt className='text-4xl mt-2 text-purple-700' />
+          <MdOutlineElectricBolt className='text-4xl mt-2 text-black' />
         <p className='text-xl px-[2em]  -mt-[2em] ml-[.5em] '>
          <b>Import, map, and generate—just like that </b>. Upload your CSV or Excel file, choose a template, and let Invoicely instantly create polished PDF invoices for every client.
         </p>
@@ -66,7 +66,7 @@ function Register() {
 
 
        <div className='flex flex-col'>
-          <IoRocket className='text-4xl mt-2 text-blue-700 '/>
+          <IoRocket className='text-4xl mt-2 text-black '/>
         <p className='text-xl px-[2em] -mt-[2em] ml-[.5em]'>
         <b>Send invoices faster and stay organized </b>. Track your billing history, customize templates, and manage all your invoices from one simple dashboard—no complex tools required.
         </p>
@@ -111,15 +111,15 @@ function Register() {
            <input ref={passwordRef} className="w-[90%] lg:w-[80%]  mt-[.5em] mb-[.5em] h-[3em] border p-4  font-normal border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="password" name="username" placeholder='Password'/>
          </div>
 
-             <button onClick={signUp}  className='bg-purple-500 inline-flex rounded-md p-[.75em]  text-white lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1.5em]'>
+             <button onClick={signUp}  className='bg-black inline-flex rounded-md p-[.75em]  text-white lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1.5em]'>
                          
                          <p className='m-auto font-bold '>Join Invoicely</p>
                       
                          </button>
 
-            <div className="inline-flex gap-[.25em] mx-auto">
+            <div className="inline-flex  gap-[.25em] mx-auto">
                 <p>Already joined?</p>
-                <Link href='/Auth/Login' className='text-purple-500'>Login</Link>
+                <Link href='/Auth/Login' className='text-blue-500'>Login</Link>
             </div>
             
         </div>

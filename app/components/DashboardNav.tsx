@@ -26,7 +26,7 @@ export default function Navbar({user, fullNav}) {
   
   return (
     <>
-     <div className='lg:hidden w-full  absolute bg-green-500 top-[1em] left-[1em] '>
+     <div className='lg:hidden w-full mr-[5em]  absolute bg-green-500 top-[1em] left-[1em] '>
       
     
 {
@@ -80,8 +80,12 @@ export default function Navbar({user, fullNav}) {
     ' bg-white fixed h-screen hidden w-[15em] -mt-[1.5em]  px-[1.5em]  lg:flex flex-col gap-[3em]  ':
        'bg-white fixed h-screen hidden  py-[1em] px-[.5em]  lg:flex flex-col gap-[3em] w-fit'}>
              
-    
+    {
+      fullNav? 
      <Image src='/sp.png' className='mt-[-1em] ml-[.5em] mb-[-4em] ' alt='logo' width='120' height='50'/>
+    :
+    <Image src='/sp.png' className='mt-[-1em] -ml-[.75em] mb-[-4em] ' alt='logo' width='120' height='50'/>
+    }
            <Link  href='/Dashboard' className="w-full h-[3em] px-[1em] pt-[1em] pb-[1.5em]  inline-flex gap-[1em] lg:-mt-[5em]'>
 ">
      
@@ -183,7 +187,7 @@ export default function Navbar({user, fullNav}) {
   {/* <p className='bg-blue-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Business</p> */}
   {
     fullNav?
-    <p className='bg-purple-500 font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]'>Pro</p>:''
+    <p className={user.plan == 'Basic'? 'bg-[#c0f556] font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]':  'bg-black font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]'}>{user.plan}</p>:''
   }
   
   </div>

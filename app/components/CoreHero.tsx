@@ -9,7 +9,7 @@ export default function CoreHero() {
   return (
     <div className='px-[5em] py-[10em] w-full'>
 
-      <p className='text-xl text-gray-500 font-medium m-auto text-center mt-[1.25em] '>Spreadsheet → Invoice</p>
+      {/* <p className='text-xl text-gray-500 font-medium m-auto text-center mt-[1.25em] '>Spreadsheet → Invoice</p> */}
       <div className="flex flex-row mt-[5em]">
 
         <div className='w-1/2 pl-[4em]'>

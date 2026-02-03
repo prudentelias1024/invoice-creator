@@ -63,14 +63,14 @@ function Login() {
            <input ref={passwordRef} className="w-[90%] lg:w-[80%]  mt-[.5em] mb-[.5em] h-[3em] border p-4  font-normal border-[#ccc] rounded-md bg-[#fafafa] text-[#18181b]"   type="password" name="username" placeholder='Password'/>
          </div>
 
-             <button onClick={loginUserIn}  className='bg-purple-500 inline-flex rounded-md p-[.75em]  text-white lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1.5em]'>
+             <button onClick={loginUserIn}  className='bg-black inline-flex rounded-md p-[.75em]  text-white lg:w-[75%] w-[90%] pr-[4em] lg:ml-[4em] mt-[2em] mb-[1em] pl-[3em] ml-[1.5em]'>
                          
                          <p className='m-auto font-bold '>Continue with Email</p>
                       
                          </button>
             <div className="inline-flex mb-[2em] gap-[.25em] ml-[5em] lg:ml-[8em]">
                 <p>Not a User?</p>
-                <Link href='/Auth/Register' className='text-purple-500'>Signin</Link>
+                <Link href='/Auth/Register' className='text-blue-700'>Signin</Link>
             </div>
         </div>
         </div>

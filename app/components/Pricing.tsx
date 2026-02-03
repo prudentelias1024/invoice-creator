@@ -39,12 +39,18 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <div className='lg:pt-[10em] text-center flex flex-col'>
+    <div className='lg:pt-[10em] bg-gray-50 text-center flex flex-col'>
         <p className='text-4xl font-bold'>Pricing</p>
         <div className="prices flex flex-row lg:gap-[3.5em] lg:pl-[7.5em] pt-[5em]">
             {
                 plans.map((plan,index) => {
-                    return <Plan features={plan.features} fee={plan.fee} name={plan.name} key={index}/>
+                    if (index == 1) {   
+                        return <Plan color='bg-[#d7e8b5]' features={plan.features} fee={plan.fee} name={plan.name} key={index}/>
+                    } else if (index == 2) {
+                         return <Plan color='bg-[#141414] text-white' features={plan.features} fee={plan.fee} name={plan.name} key={index}/>
+                    } else {
+                         return <Plan color='' features={plan.features} fee={plan.fee} name={plan.name} key={index}/>
+                    }
                 })
             }
             

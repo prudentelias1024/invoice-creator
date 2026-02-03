@@ -169,7 +169,7 @@ return finerInvoice(headers,docu)
         <DashboardNav user={user.user_metadata} fullNav={false} />:''
       }
 
-        <div className="uploader ml-[.5em] p-[1em] lg:mb-[4em] rounded-md flex flex-col gap-[1.5em]  shadow-xs  border-gray-200 lg:w-[30%] w-full lg:mt-[2em] lg:p-[1em] lg:ml-[8em]">
+        <div className="uploader ml-[.5em] p-[1em] lg:mb-[4em] rounded-md flex flex-col gap-[1.5em]  shadow-xs  border-gray-200 lg:w-[30%] w-full lg:mt-[2em] lg:p-[1em] lg:ml-[12em]">
 {/* { files.length> 0?'': */}
       <p className='font-bold text-xl'>Create a new invoice</p>
       <p className='font-light text-sm -mt-[1.4em]'>Fill details for invoice</p>
