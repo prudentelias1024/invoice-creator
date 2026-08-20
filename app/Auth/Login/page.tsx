@@ -8,12 +8,12 @@ import client from '@/lib/supabase/server'
 import { useRouter } from 'next/navigation'
 import { Toaster ,toast} from 'sonner'
 function Login() {
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const loginUserIn = async() => {
-    const email = emailRef.current.value
-    const password = passwordRef.current.value
+    const email = emailRef.current!.value
+    const password = passwordRef.current!.value
     console.log(email,password)
     const {data, error } = await client.auth.signInWithPassword({
      email: email,

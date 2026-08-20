@@ -1,8 +1,12 @@
-export interface FileInterface  {
-
-  lastModifiedTime: Number,
-  name: String,
-  size: Number,
-  lastModifiedDate:Date,
-  type: String
- }
+export interface FileInterface {
+  lastModifiedTime: number;
+  name: string;
+  size: string;
+  current: {
+    click: () => void;
+    files: FileList;
+    value: string;
+    lastModifiedDate: Date;
+    type: string;
+  };
+}

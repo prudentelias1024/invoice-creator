@@ -5,14 +5,15 @@ import { useAuth } from '@/app/components/Context/AuthProvider'
 import Client from '@/app/components/Client'
 import Link from 'next/link'
 import { AiOutlinePlus } from 'react-icons/ai'
-import Modal from "react-modal";
+import Modal from "react-modal";  
 import AddClient from '@/app/components/AddClient'
 import client from '@/lib/supabase/server'
 import EditClient from '@/app/components/EditClient'
 const  Clients = () => {
    const [modalIsOpen, setModalIsOpen] = useState(false);
-   const [clients, setClients] = useState([])
-   const {user, session} = useAuth()
+  const [clients, setClients] = useState<any[]>([])
+  const auth = useAuth()
+  const user = auth?.user ?? null
    const [created, setCreated] = useState(false)
    const [deleted, setDeleted] = useState(false)
    const [edited, setEdited] = useState(false)
@@ -41,10 +42,10 @@ const  Clients = () => {
     setModalIsOpen(false)
   }
   const getClients = async() => {
-    const res = await client.from('clients').select().eq('added_by', user.id)
+    const res = await client.from('clients').select().eq('added_by', user?.id)
     
     if(res.data){
-      setClients([...res.data])
+      setClients(res.data)
     }
   }
   useEffect(() => {

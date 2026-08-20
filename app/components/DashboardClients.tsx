@@ -4,10 +4,20 @@ import React, {useState, useEffect} from 'react'
 import client from '../api/Client'
 import { useAuth } from './Context/AuthProvider'
 
+type ClientRecord = {
+  client_title: string
+  client_name: string
+  client_email: string
+  client_phonenumber: string
+  client_address: string
+}
+
 function DashboardClients() {
-  const {user, session} = useAuth()
-  const [clients,setClients] = useState<Array<string>>([])
+  const auth = useAuth()
+  const user = auth?.user
+  const [clients,setClients] = useState<ClientRecord[]>([])
    const getClients = async() => {
+    if (!user) return
     const res = await client.from('clients').select().eq('added_by', user.id)
     
     if(res.data){
@@ -16,7 +26,7 @@ function DashboardClients() {
   }
     useEffect(() => {
       getClients()
-    },[])
+    },[user])
         
   return (
 

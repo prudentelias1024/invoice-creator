@@ -6,14 +6,15 @@ import client from '../api/Client'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 
 function DashboardAssets() {
-  const {user,session} = useAuth()
-  const [assets, setAssets] = useState<Array>([])
+  const user = useAuth()?.user
+  const [assets, setAssets] = useState<Array<{ asset_url: string }>>([])
   
   const getLogo = async() => {
-   
+      if (!user) return
+
      const res = await client.from('assets').select().eq('user_id', user.id)
 
-    setAssets([...res.data])
+    setAssets([...(res.data ?? [])])
     
   }
 

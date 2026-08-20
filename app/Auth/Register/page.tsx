@@ -10,15 +10,15 @@ import { useRouter } from 'next/navigation'
 import { Toaster ,toast} from 'sonner'
 function Register() {
     const router = useRouter()
-    const fullnameRef = useRef<string>(null)
-    const emailRef = useRef<string>(null)
-    const passwordRef = useRef<string>(null)
+    const fullnameRef = useRef<HTMLInputElement>(null)
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
 
 
     const signUp = async() => {
-      const fullname = fullnameRef.current.value  
-      const email = emailRef.current.value  
-      const password = passwordRef.current.value
+      const fullname = fullnameRef.current!.value  
+      const email = emailRef.current!.value  
+      const password = passwordRef.current!.value
      
       const {data, error} = await client.auth.signUp({
          email, password, options: {

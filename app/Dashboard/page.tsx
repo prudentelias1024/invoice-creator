@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import client from '../api/Client'
 import { actions } from '@/store'
 function Dashboard() {
-  const {user, session} = useAuth()
+  const user= useAuth()?.user
  
  const dispatch = useDispatch()
  const getLogo = async() => {
     console.log(user )
-    const res = await client.from('assets').select().eq('user_id', user.id)
+    const res = await client.from('assets').select().eq('user_id', user?.id)
     console.log(res.data,user)
     dispatch(actions.updateAssets(res.data))
 
@@ -24,14 +24,14 @@ function Dashboard() {
       getLogo()
   },[])
   
- const {assets} = useSelector(state => state)
+ const assets = useSelector((state: any) => state.assets)
   console.log(assets) 
  
   return (
     <div className='flex flex-row'>
       {
       user !== null?
-      <DashboardNav fullNav={true} user={user.user_metadata}/>
+      <DashboardNav fullNav={true} user={user?.user_metadata}/>
       :''
       }
       <div className="flex flex-col lg:ml-[15em]">

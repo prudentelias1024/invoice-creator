@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx'
 import Image from 'next/image'
 import { basicInvoice } from "../Invoices/Basic";
 import { finerInvoice } from "../Invoices/Finer";
+import { FileInterface } from '../interfaces/FileInterface'
 const Upload = () =>  {
  
  
@@ -40,11 +41,11 @@ const Upload = () =>  {
 
     const workbook = XLSX.read(base64, { type: "base64" });
     // console.log(workbook)
-    const doc = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
+    const doc: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
    
     // console.log(doc)
-    let tempkeys = []
-    let tempHeaders = []
+    let tempkeys: any[] = []
+    let tempHeaders: any[] = []
     
     
     console.log(Object.entries(doc[0]).forEach((entry) =>{
@@ -60,8 +61,8 @@ const Upload = () =>  {
     setHeaders(tempHeaders)
    
     //turn workbook into array
-    let temp = []
-    const temp_wb = []
+    let temp: any[] = []
+    const temp_wb: any[] = []
     // console.log(doc)
     doc.forEach((row,idx) => {
 

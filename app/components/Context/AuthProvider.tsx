@@ -1,12 +1,19 @@
 'use client'
 import { createContext , useState, useEffect, useContext} from "react";
+import type { ReactNode } from "react";
 import client from '../../api/Client'
+import type { Session, User } from '@supabase/supabase-js'
 
-const AuthContext = createContext(null)
+type AuthContextValue = {
+  user: User | null
+  session: Session | null
+}
 
-const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null)
-    const [session, setSession] = useState(null)
+const AuthContext = createContext<AuthContextValue | null>(null)
+
+const AuthProvider = ({children}: { children: ReactNode }) => {
+    const [user, setUser] = useState<User | null>(null)
+    const [session, setSession] = useState<Session | null>(null)
     const [loading,setLoading] = useState(true)
     const getSession = async () => {
         const {data: {session}} = await client.auth.getSession()

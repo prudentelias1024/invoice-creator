@@ -35,15 +35,15 @@ const divStyle = {
   // height: '100vh',
 }
 
-export default function PDFPreviewer({fileData, loadingState }) {
+export default function PDFPreviewer({fileData, loadingState,}: {  fileData: any,  loadingState: (loading: boolean) => void
+}) {
   // pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(WorkerMessageHandler, import.meta.url).toString()
   let tempPdf =[]
 
-  const [imgSrc, setImgSrc] = useState();
-  const [pdfImages, setPdfImages] = useState([])
+  const [pdfImages, setPdfImages] = useState<string[]>([])
   const [imageUpdated, setImageUpdated] = useState(false)
 
-const renderImage = async (pdf, pageNum, temp) => {
+const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
    console.log(pageNum)
     const page = await pdf.getPage(pageNum);
 
@@ -72,9 +72,9 @@ const renderImage = async (pdf, pageNum, temp) => {
      
     };
     
- const loadPDF = async(file_data) => {
+ const loadPDF = async(file_data:any) => {
       const pdf = await pdfjsLib.getDocument({ data: file_data }).promise
-      const temp_img = []
+      const temp_img :any[] = []
       const no_of_pages = pdf.numPages
      
       for (let i = 1; i <= no_of_pages; i++) {

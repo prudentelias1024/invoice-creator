@@ -13,11 +13,18 @@ import {actions} from '@/store/index'
 import { redirect,  RedirectType } from "next/navigation";
 import EditClient from './EditClient';
 import Modal from "react-modal";
+import { ClientInterface } from '../interfaces/ClientInterface';
+import { useAuthProp } from '../interfaces/useAuthInterface';
+type ClientProps = {
+  data: ClientInterface;
+  deleted: (value: boolean) => void;
+  edited: (value: boolean) => void;
+};
 
-export default function Client({data, deleted, edited}) {
+export default function Client({data, deleted, edited}: ClientProps) {
   const dispatch = useDispatch()
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const {user, session} = useAuth()
+  // const {user, session} : useAuthProp = useAuth()
   const [showOptions,setShowOptions] = useState(false)
   const deleteClient = async() => {
     console.log(data.id)
@@ -58,8 +65,9 @@ export default function Client({data, deleted, edited}) {
     setModalIsOpen(false)
   }
  
+ 
 
-  const createInvoiceForUser = async(data) => {
+  const createInvoiceForUser = async(data: ClientInterface) => {
       dispatch(actions.updateInvoiceRecipient(data))
       redirect('/Dashboard/invoices/Upload')
   }
@@ -73,7 +81,7 @@ export default function Client({data, deleted, edited}) {
               style={customStyles}
               contentLabel="Example Modal"
             >
-                <EditClient data={data} closeModal={closeModal} edited={edited}> </EditClient>
+                <EditClient data={data} closeModal={closeModal} edited={edited} />
       
             </Modal>
       

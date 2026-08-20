@@ -4,31 +4,37 @@ import { MdOutlineCancel } from 'react-icons/md'
 import client from '../api/Client'
 import { useAuth } from './Context/AuthProvider'
 import {BounceLoader} from 'react-spinners'
+import { useAuthProp } from '../interfaces/useAuthInterface'
+interface AddClientProps {
+  closeModal: () => void;
+  created: (created: boolean) => void;
+}
 
 
-export default function AddClient({closeModal, created}) {
+export default function AddClient({closeModal, created}: AddClientProps) {
   const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
   borderColor: "red",
 };
-   const {user,session} = useAuth()
+  const auth = useAuth()
+  const {user, session} = auth ?? {user: null, session: null}
     const [loading, setLoading] = useState(false)
-    const fullnameRef = useRef() 
-    const emailRef = useRef() 
-    const phonenoRef = useRef() 
-    const titleRef = useRef() 
-    const addressRef = useRef() 
+    const fullnameRef = useRef<HTMLInputElement>(null)
+    const emailRef = useRef<HTMLInputElement>(null)
+    const phonenoRef = useRef<HTMLInputElement>(null)
+    const titleRef = useRef<HTMLInputElement>(null)
+    const addressRef = useRef<HTMLInputElement>(null)
     const createClient = async() => {
       setLoading(true)
        const res = await client.from('clients').insert(
         {
-          client_name: fullnameRef.current.value,
-          client_address: addressRef.current.value,
-          client_phonenumber: phonenoRef.current.value,
-          client_title : titleRef.current.value,
-          client_email: emailRef.current.value,
-          added_by: user.id
+          client_name: fullnameRef.current!.value,
+          client_address: addressRef.current!.value,
+          client_phonenumber: phonenoRef.current!.value,
+          client_title : titleRef.current!.value,
+          client_email: emailRef.current!.value,
+          added_by: user?.id
 
         }
       )

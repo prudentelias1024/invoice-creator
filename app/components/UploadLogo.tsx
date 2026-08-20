@@ -5,18 +5,24 @@ import {FileInterface} from '../interfaces/FileInterface'
 import client from '../api/Client'
 import {Toaster, toast} from 'sonner'
 import { useAuth } from './Context/AuthProvider'
-export default function UploadLogo(setLogo) {
+export default function UploadLogo({setLogo}: { setLogo: React.Dispatch<React.SetStateAction<Boolean>> }) {
    
-   const {user, session} = useAuth()
-   const fileRef = useRef<Array<FileInterface>>()
+  const auth = useAuth()
+  const user = auth?.user
+
+  if (!user) {
+    return null
+  }
+  const fileRef = useRef<HTMLInputElement >(null)
    const [filesizeError, setFileSizeError] = useState<String>('')
      const clickUpload = () => {
-   fileRef.current.click()
- }
+          fileRef.current!.click()
+      }
    
-   const uploadFile = async(event:React.ChangeEvent<HTMLInputElement>) => {
-      const  file = fileRef.current.files[0]
-      const file_size = (parseInt(file.size / 1024))
+   const uploadFile = async() => {
+      const  file = fileRef.current?.files?.[0]
+      if (!file) return
+      const file_size = (file.size / 1024)
       if (file_size > 50) {
         setFileSizeError("Cannot upload file up to 50KB in assets")
         toast.error("Cannot upload file up to 50KB in assets")
@@ -31,19 +37,20 @@ export default function UploadLogo(setLogo) {
       
         if(data){
 
-        const { err } = await client.from("assets").insert({
+        const  err  = await client.from("assets").insert({
           user_id:user.id,
           asset_url: `${"https://uutgahcujgkdyqnhmkww.supabase.co/storage/v1/object/public/logo/"+data.path}`
         })
+      }
         
-        if (err) {
-          toast.error(err)
+        if (error) {
+          toast.error(error.message)
         } else {
           toast.success('Logo uploaded successfully')
-          setLogo.setLogo(true)
+          setLogo(() => true)
           
         }
-      }
+      
 
     }
   }

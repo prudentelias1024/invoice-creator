@@ -17,10 +17,11 @@ import PDFPreviewer from '@/app/components/PDFPreviewer'
 import { useSelector } from 'react-redux'
 
 import {BounceLoader} from 'react-spinners'
+import { FileInterface } from '../../../interfaces/FileInterface'
 const Upload = () =>  {
-  const {user, session} = useAuth() 
+  const user = useAuth()?.user
  
- const {profileToInvoice} = useSelector(state=>state)
+ const {profileToInvoice}:any = useSelector(state=>state)
  const [uploadInfo, setUploadInfo] = useState(null)
  const [loading, setLoading] = useState(false)
  const [files, setFiles] = useState<Array<FileInterface>>([])
@@ -39,7 +40,7 @@ const Upload = () =>  {
  }
 
  
-const override: CSSProperties = {
+const override = {
   display: "block",
   margin: "auto",
   borderColor: "purple",
@@ -47,7 +48,7 @@ const override: CSSProperties = {
   width: '100%'
 };
 
- const  imageUrlToBase64 = async(url) => {
+ const  imageUrlToBase64 = async(url:any) => {
   const res = await fetch(url);
   const blob = await res.blob();
 
@@ -73,14 +74,14 @@ const override: CSSProperties = {
 
     const workbook = XLSX.read(base64, { type: "base64" });
     // console.log(workbook)
-    const doc = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
+    const doc: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
     
     // console.log(doc)
-    let tempkeys = []
-    let tempHeaders = []
+    let tempkeys :any[]= []
+    let tempHeaders:any[] = []
     
     
-    console.log(Object.entries(doc[0]).forEach((entry) =>{
+    console.log(Object.entries(doc?.[0] || {}).forEach((entry) =>{
         tempkeys.push(entry[0])
         tempHeaders.push(entry[1])
       }));
@@ -93,15 +94,15 @@ const override: CSSProperties = {
       setHeaders(tempHeaders)
       
       //turn workbook into array
-      let temp = []
-      const temp_wb = []
+      let temp :any[]= []
+      const temp_wb: any[] = []
       // console.log(doc)
-      doc.forEach((row,idx) => {
+      doc.forEach((row: any, idx: number) => {
         
         if(idx > 0 ){
-          tempkeys.forEach((key,idx) => {
+          tempkeys.forEach((key: string) => {
             // console.log(key)
-            if(row[key] == undefined){
+            if(row?.[key] == undefined){
               temp.push('')
             } else{     
               temp.push(row[key])
@@ -166,7 +167,7 @@ return finerInvoice(headers,docu)
     <div className='w-full flex flex-row '>
       {
         user!== null?
-        <DashboardNav user={user.user_metadata} fullNav={false} />:''
+        <DashboardNav user={user?.user_metadata} fullNav={false} />:''
       }
 
         <div className="uploader ml-[.5em] p-[1em] lg:mb-[4em] rounded-md flex flex-col gap-[1.5em]  shadow-xs  border-gray-200 lg:w-[30%] w-full lg:mt-[2em] lg:p-[1em] lg:ml-[12em]">

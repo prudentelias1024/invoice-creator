@@ -9,7 +9,7 @@ import Upload from '@/app/components/Upload'
 import { useAuth } from '@/app/components/Context/AuthProvider'
 import { FaAngleRight } from 'react-icons/fa'
 export default function Invoices() {
-  const {user, session} = useAuth()
+  const user = useAuth()?.user
    
  useEffect(() => {
     Modal.setAppElement('#invoices')
@@ -44,7 +44,7 @@ const customStyles = {
       <div id='invoices'>
         {
           user !== null?
-            <DashboardNav fullNav={true} user={user.user_metadata}/>
+            <DashboardNav fullNav={true} user={user?.user_metadata}/>
             : ''
         }
     

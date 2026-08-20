@@ -11,12 +11,17 @@ import client from '@/lib/supabase/server'
 export default function Assets() {
   const [loading, setLoading] = useState(true)
   const [newLogoUploaded, setNewLogoUploaded] = useState<Boolean>(false)
-  const {user,session} = useAuth()
-  const [logo,setLogo] = useState<Array>([])
+  const auth = useAuth()
+  const user = auth?.user
+  const [logo,setLogo] = useState<Array<{ asset_url: string }>>([])
   const getLogo = async() => {
+     if (!user) {
+       setLoading(false)
+       return
+     }
      const res = await client.from('assets').select().eq('user_id', user.id)
     console.log(res.data)
-    setLogo([...res.data])
+    setLogo([...res.data ? [...res.data] : []])
     setLoading(false)
   }
   useEffect(() => {
@@ -28,9 +33,9 @@ export default function Assets() {
     <div>
       {
         user!== null?
-        <DashboardNav fullNav={true} user={user.user_metadata}/>: 
+        <DashboardNav fullNav={true} user={user?.user_metadata}/>: 
 
-        ''
+        ''    
       }
            
         <div className="assets flex  flex-col ml-[1em] pt-[3em] lg:ml-[15em]">

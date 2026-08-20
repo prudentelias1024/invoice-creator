@@ -8,12 +8,13 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BsClockHistory } from 'react-icons/bs';
 import Link from 'next/link';
 import Image from 'next/image'  
-interface User  {
-    fullname: string,
-    email: string,
-    plan: string
+
+interface NavbarProps {
+  user?: Record<string, any>,
+  fullNav: boolean
 }
-export default function Navbar({user, fullNav}) {
+
+export default function Navbar({ user, fullNav }: NavbarProps) {
   const [openSideNav, setOpenSideNav] = useState<Boolean>(false)
 
   
@@ -27,6 +28,7 @@ export default function Navbar({user, fullNav}) {
   return (
     <>
      <div className='lg:hidden w-full mr-[5em]  absolute bg-green-500 top-[1em] left-[1em] '>
+
       
     
 {
@@ -186,7 +188,7 @@ export default function Navbar({user, fullNav}) {
 }
   {/* <p className='bg-blue-500 font-bold rounded-md text-center text-xs    w-fit py-[.125em] px-[.5em] text-white'>Business</p> */}
   {
-    fullNav?
+    fullNav && user!== undefined?
     <p className={user.plan == 'Basic'? 'bg-[#c0f556] font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]':  'bg-black font-bold rounded-md text-center text-xs   mt-[.5em] w-fit py-[.125em] px-[.5em] text-white mb-[1em]'}>{user.plan}</p>:''
   }
   

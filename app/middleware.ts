@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { updateSession} from '@/lib/supabase/server'
+import updateSession from "@/lib/supabase/server";
 
 const public_routes = ["/sign-in", "/sign-up"]; // for non-authenticated users
 
@@ -10,7 +10,13 @@ export function isPublicRoute(request: NextRequest) {
 export async function middleware(request: NextRequest) {
   // update user session if he is authenticated
 
-  const { user, response } = await updateSession(request);
+  // const { user, response } = await updateSession(request)
+
+  const {
+    data: { user },
+  } = await updateSession.auth.getUser();
+  
+  const response = NextResponse.next();
 
   // if route is not public redirect to /sign-in page
   if (!isPublicRoute(request) && !user) {
