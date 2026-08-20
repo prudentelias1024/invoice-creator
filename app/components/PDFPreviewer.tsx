@@ -1,7 +1,5 @@
 'use client'
 import React, {useState, useEffect} from 'react'
-import * as pdfjsLib from "../pdf.mjs";
-// import pdfWorker from "../pdf.worker.min.mjs";
 import { Fade  } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import { log } from 'console';
@@ -98,11 +96,24 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
   }
 }
 
+  // useEffect(() => {
+  // pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`; 
+  // callLoadPDF()
+  //   // 1. Load the PDF from base64 or Uint8Array
+  // }, [fileData, imageUpdated]);
+
   useEffect(() => {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`; 
-  callLoadPDF()
-    // 1. Load the PDF from base64 or Uint8Array
-  }, [fileData, imageUpdated]);
+  const loadPDFJS = async () => {
+    const pdfjsLib = await import("../pdf.mjs");
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
+    await callLoadPDF();
+  };
+
+  loadPDFJS();
+}, [fileData]);
 
   return (
     <div className="w-full h-screen ml-[2em]">
