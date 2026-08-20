@@ -20,15 +20,15 @@ function Login() {
      password:password,
     })
   
-    console.log(data,error);
+    console.log(error);
   
-    if(data){
+    if(data.user !== null){ 
       toast.success('Sign in successful')
       router.push('/Dashboard')
+    } else {
+      toast.error('Sign in failed, please check your credentials or sign up if you do not have an account')
     }
-    if(error){
-      toast.error('An Error occured, please try signing in again')
-    }
+    
   }
   
   return (

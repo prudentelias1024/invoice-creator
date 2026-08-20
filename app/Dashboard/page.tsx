@@ -24,7 +24,7 @@ function Dashboard() {
       getLogo()
   },[])
   
- const assets = useSelector((state: any) => state.assets)
+ const assets = useSelector((state: { assets: unknown }) => state.assets)
   console.log(assets) 
  
   return (

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { AiTwotoneFileText } from 'react-icons/ai'
 import { MdElectricBolt, MdOutlineElectricBolt } from 'react-icons/md'
 import { IoRocket } from 'react-icons/io5'
-import  client from '@/lib/supabase/server'
+import  client from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Toaster ,toast} from 'sonner'
 function Register() {
@@ -27,14 +27,15 @@ function Register() {
           }
          }
       })
-      if(data){
+      console.log(data);
+      if(data.user !== null){
         toast.success('Signed you up successfully !!!!')
         setTimeout(() => {
           router.push('/Auth/Login')
         }, 3000);
       }
       if(error){
-        toast.error('Cannot sign you in. Try again')
+        toast.error('Cannot sign you up. Try again')
       }
     }
 
