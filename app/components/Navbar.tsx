@@ -5,8 +5,8 @@ import React from 'react'
 const Navbar = () => {
   return (
     <div className="flex flex-row justify-around lg:pl-[2em] lg:pt-[1em]">
-        <div className="-ml-[5em] flex">
-            <Image src='/sp.png' className='-mt-[4em]' alt='logo' width='180' height='180'/>
+        <div className="lg:-ml-[5em] flex">
+            <Image src='/sp.png' className='lg:-mt-[4em] -mt-[2em]' alt='logo' width='180' height='180'/>
             {/* <p className='text-2xl font-black text-black mt-[.5em]'>Invoicer</p> */}
         </div>
 

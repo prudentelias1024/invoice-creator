@@ -41,7 +41,7 @@ const Pricing = () => {
   return (
     <div className='lg:pt-[10em] bg-gray-50 text-center flex flex-col'>
         <p className='text-4xl font-bold'>Pricing</p>
-        <div className="prices flex flex-row lg:gap-[3.5em] lg:pl-[7.5em] pt-[5em]">
+        <div className="prices flex flex-col pl-[1.75em] lg:flex-row lg:gap-[3.5em] lg:pl-[7.5em] pt-[5em]">
             {
                 plans.map((plan,index) => {
                     if (index == 1) {   
