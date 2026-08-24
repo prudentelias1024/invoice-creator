@@ -21,8 +21,9 @@ import { FileInterface } from '../../../interfaces/FileInterface'
 const Upload = () =>  {
   const user = useAuth()?.user
  
- const {profileToInvoice}:any = useSelector(state=>state)
+ const profileToInvoice:any = useSelector((state: any) => state.profileToInvoice)
  const [uploadInfo, setUploadInfo] = useState(null)
+//  const [reUploadedState, setReUploadedState] = useState(false)
  const [loading, setLoading] = useState(false)
  const [files, setFiles] = useState<Array<FileInterface>>([])
  const [fileExt, setFileExt] = useState('')
@@ -35,6 +36,7 @@ const Upload = () =>  {
  const [preview, setPreview] = useState<boolean>(false)
  const [previewData, setPreviewData] = useState<any>(null)
  const [uploadedFile, setUploadedFile] = useState<boolean>(false)
+ const [fileId, setFileId] = useState<string>('')
  const clickUpload = () => {
    fileRef.current.click()
  }
@@ -64,8 +66,13 @@ const override = {
   setUploadedFile(true)
   
   setLoading(true)
-
+  let tempkeys :any[]= []
+  let tempHeaders:any[] = []
+   //turn workbook into array
+  let temp :any[]= []
+  const temp_wb: any[] = []
   setFiles([...fileRef.current.files])
+  console.log(fileRef.current.files[0].lastModified.toString())
   const reader = new FileReader();
  
   reader.onload = function () {
@@ -76,15 +83,13 @@ const override = {
     // console.log(workbook)
     const doc: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
     
-    // console.log(doc)
-    let tempkeys :any[]= []
-    let tempHeaders:any[] = []
+   
     
     
-    console.log(Object.entries(doc?.[0] || {}).forEach((entry) =>{
+    Object.entries(doc?.[0] || {}).forEach((entry) =>{
         tempkeys.push(entry[0])
         tempHeaders.push(entry[1])
-      }));
+      });
       
       
       //keys are used to extract the rows from the wb
@@ -93,10 +98,7 @@ const override = {
       //headers is the first row
       setHeaders(tempHeaders)
       
-      //turn workbook into array
-      let temp :any[]= []
-      const temp_wb: any[] = []
-      // console.log(doc)
+     
       doc.forEach((row: any, idx: number) => {
         
         if(idx > 0 ){
@@ -115,7 +117,8 @@ const override = {
       })
       
       setDocu(temp_wb)
-      
+      setKeys(tempkeys)
+      setHeaders(tempHeaders)
       
       
     };
@@ -125,26 +128,40 @@ const override = {
     };
     
     reader.readAsDataURL(fileRef.current.files[0]); // convert → base64
-    // await previewPDF()
-    
-    //refresh state
-    
-  }
-  
-  useEffect(() => {
-   if (uploadedFile) {
-     
-      previewPDF()
+    // setUploadedFile(!uploadedFile)
       
-   }
+  }
+  // `
+  // useEffect(() => {
+  //  if (uploadedFile) {   
+  //     previewPDF()
    
-  }, [docu,user, previewData])
+  // }
+   
+  // }, [previewData,user]);`
+  useEffect(() => {
+  if (!uploadedFile) return;
+
+  const generatePreview = async () => {
+    try {
+      await previewPDF();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  generatePreview();
+}, [docu,fileId]);
 
 const previewPDF = async() => {
   const doc = await makePDF()
   const pdfBlob = await doc.output("blob").arrayBuffer()
   setPreview(true)
+  setFileId(fileRef.current.files[0].lastModified.toString())
   setPreviewData(pdfBlob)
+ 
+  
+
 
   
 }
@@ -213,7 +230,8 @@ return finerInvoice(headers,docu)
           <div className='flex w-full justify-between'>
 
    {/* <button onClick={previewPDF}  className=' text-white w-[7em] lg:w-[6em] p-[.5em] rounded-md h-fit mt-[1em] bg-yellow-500  '>Preview </button> 
-   <button onClick={downloadPDF}  className='  text-white w-[7em] lg:w-[6em] p-[.5em] rounded-md mt-[1em] bg-purple-500  '>Download </button>  */}
+   <button onClick={downloadPDF}  className='  text-white w-[7em] lg:w-[6em] p-[.5em] rounded-md mt-[1em] bg-purple-500  '>Download </button>  
+   */}
             </div>
 : ''
 }
@@ -288,12 +306,13 @@ return finerInvoice(headers,docu)
             <p className="preview">Preview</p>
             <p className="preview">PDF</p>
             <p className="preview">Preview</p>
-            <p className="preview">Download</p>
+            <button onClick={downloadPDF}  className='  text-white w-[7em] lg:w-[6em] p-[.5em] rounded-md mt-[-.5em] bg-purple-500  '>Download </button>  
+  
           </div>
 
 {
   previewData !== null ?
-  <PDFPreviewer fileData={previewData} loadingState={setLoading}></PDFPreviewer>: 
+  <PDFPreviewer fileData={previewData} loadingState={setLoading} fileId={fileId} ></PDFPreviewer>: 
   loading ? <div className='mx-auto mt-[42.5%] ml-[56%]'>
  
      <BounceLoader color={"#512bd4"}

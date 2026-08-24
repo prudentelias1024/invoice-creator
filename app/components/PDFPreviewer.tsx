@@ -33,7 +33,7 @@ const divStyle = {
   // height: '100vh',
 }
 
-export default function PDFPreviewer({fileData, loadingState,}: {  fileData: any,  loadingState: (loading: boolean) => void
+export default function PDFPreviewer({fileData, loadingState, fileId}: {  fileData: any,  loadingState: (loading: boolean) => void, fileId: String
 }) {
   // pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(WorkerMessageHandler, import.meta.url).toString()
   let tempPdf =[]
@@ -42,16 +42,20 @@ export default function PDFPreviewer({fileData, loadingState,}: {  fileData: any
   const [imageUpdated, setImageUpdated] = useState(false)
 
 const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
-   console.log(pageNum)
+  //  console.log(pageNum)
     const page = await pdf.getPage(pageNum);
 
       // 3. Define how big the preview will be
-      const viewport = page.getViewport({ scale: 20});
+      const viewport = page.getViewport({ scale: 1.5});
 
       // 4. Create an invisible canvas
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
+      if(!ctx) {
+        page.cleanup();
+        return;
+      }
       canvas.width = viewport.width;
       canvas.height = viewport.height;
 
@@ -62,17 +66,25 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
       }).promise
 
       // 6. Convert canvas to PNG image URL
-      const imageUrl = await canvas.toDataURL("image/png")
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png",0.7));
+      // const imageUrl = await canvas.toDataURL("image/png")
+     if(blob) {
+         temp.push(URL.createObjectURL(blob))
      
-      temp.push(imageUrl)
-      // 7. Save PNG URL in React state
+    }
+     canvas.height = 0;
+     canvas.width = 0;
      
+     
+     page.cleanup();
      
     };
     
  const loadPDF = async(file_data:any) => {
-      const pdf = await pdfjsLib.getDocument({ data: file_data }).promise
+     const pdfData = new Uint8Array(file_data.slice(0));
+      const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise
       const temp_img :any[] = []
+     
       const no_of_pages = pdf.numPages
      
       for (let i = 1; i <= no_of_pages; i++) {
@@ -82,6 +94,7 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
 
       setPdfImages(temp_img)
       setImageUpdated(true)
+      
     
     }
   const callLoadPDF = async() => {
@@ -103,7 +116,9 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
   // }, [fileData, imageUpdated]);
 
   useEffect(() => {
-  const loadPDFJS = async () => {
+    console.log("PDF EFFECT RUN");
+    const loadPDFJS = async () => {
+    console.log("LOADING  RUN");
     const pdfjsLib = await import("../pdf.mjs");
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -111,9 +126,19 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
 
     await callLoadPDF();
   };
+    loadPDFJS();
+    console.log('file id',fileId);
+    console.log("PDF DATA SIZE:", fileData.byteLength);
+}, [fileId]);
 
-  loadPDFJS();
-}, [fileData]);
+
+// useEffect(() => {
+//   return () => {
+//     pdfImages.forEach((url) => {
+//       URL.revokeObjectURL(url);
+//     });
+//   };
+// }, [pdfImages]);
 
   return (
     <div className="w-full h-screen ml-[2em]">

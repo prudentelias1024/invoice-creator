@@ -1,0 +1,9 @@
+PDF
+ ↓
+Page 1 → render
+ ↓
+User moves to page 2
+ ↓
+Page 1 can be released
+ ↓
+Page 2 → render

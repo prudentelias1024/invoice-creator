@@ -141,7 +141,7 @@ return finerInvoice(headers,docu)
         
           return <div key={idx} className='rounded-md  mt-[2em]  flex flex-col gap-[1em]  border-gray-200 justify-between '>
 
-            <div className="flex flex-col gap-[1em] m-auto pl-[1em] lg:pl-[0em] py-[1em] " >
+            <div className="flex flex-col gap-[1em] m-auto pl-[1em] lg:pl-0 py-[1em] " >
                 <PiMicrosoftExcelLogoFill className='m-auto text-green-700 text-4xl lg:text-6xl' />
                 <div className='flex flex-col'>
 
@@ -173,7 +173,7 @@ return finerInvoice(headers,docu)
     {preview && (
       <iframe
        style={{ width: "100%", height: "100vh", border: "none" }}
-      className='h- mt-[6em]'
+      className='h- mt-[6em]' loading="eager"
         src={previewData} />
 
     )}

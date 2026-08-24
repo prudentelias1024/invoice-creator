@@ -26,11 +26,11 @@ export const finerInvoice = (headers,docu) => {
     doc.setTextColor("purple")
     doc.setFontSize(20)
    
-    doc.text('EDACARE',(pagewidth/2 - 10), 20)
+    doc.text('EDACARE',(pagewidth/2- 50), 20)
     doc.setFontSize(10)
     doc.setTextColor("black")
-    doc.text("34, Campbell Street,Lagos State", (pagewidth/2 -20), 27);
-    doc.text("Tel: 09077096480, 09030652780", ((pagewidth/2) -20), 33 );
+    doc.text("34, Campbell Street,Lagos State", (pagewidth/2 -60), 27);
+    doc.text("Tel: 09077096480, 09030652780", ((pagewidth/2) -60), 33 );
     
    
     // doc.text("Invoice", 13, 40);
@@ -63,6 +63,7 @@ export const finerInvoice = (headers,docu) => {
           fontSize: 10,
           halign: "left",
           font: 'thiccboi',
+          fontStyle: 'normal',
           cellWidth: 'wrap'
         },
         tableWidth: 'wrap',
