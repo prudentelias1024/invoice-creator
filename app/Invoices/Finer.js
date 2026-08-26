@@ -2,20 +2,20 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-import thiccboi from './thiccboi.js'
+import gentium from './gentium_normal.js';
 
 export const finerInvoice = (headers,docu) => {
    
     const doc = new jsPDF();
-    doc.addFileToVFS("thiccboi.ttf", thiccboi);
-    doc.addFont("thiccboi.ttf", "thiccboi", "normal");
-    doc.setFont("thiccboi");
+    doc.addFileToVFS("gentium.ttf", gentium);
+    doc.addFont("gentium.ttf", "gentium", "normal");
+    doc.setFont("gentium");
      // --- HEADER ---
       doc.setFontSize(30);
     doc.setLineHeightFactor(1.5)
       const pagewidth = doc.internal.pageSize.width;
       const pageHeight = doc.internal.pageSize.height;
-   
+    
       // console.log(base64Image)
       // if(base64Image !== undefined || base64Image !== ''){
 
@@ -62,14 +62,14 @@ export const finerInvoice = (headers,docu) => {
         styles: {
           fontSize: 10,
           halign: "left",
-          font: 'thiccboi',
+          font: 'gentium',
           fontStyle: 'normal',
           cellWidth: 'wrap'
         },
         tableWidth: 'wrap',
         
         headStyles: {
-          font: 'thiccboi', 
+          font: 'gentium', 
           fillColor: [204,204,204], // Purple header
           textColor: 255,
         },

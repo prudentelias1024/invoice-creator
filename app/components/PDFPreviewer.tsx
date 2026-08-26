@@ -129,7 +129,7 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
     loadPDFJS();
     console.log('file id',fileId);
     console.log("PDF DATA SIZE:", fileData.byteLength);
-}, [fileId]);
+}, [fileId, fileData]);
 
 
 // useEffect(() => {

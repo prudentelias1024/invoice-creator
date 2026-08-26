@@ -37,6 +37,8 @@ const Upload = () =>  {
  const [previewData, setPreviewData] = useState<any>(null)
  const [uploadedFile, setUploadedFile] = useState<boolean>(false)
  const [fileId, setFileId] = useState<string>('')
+ const currencyRef:RefObject<any> = useRef('$')
+ const [updatedCurrency, setUpdatedCurrency] = useState<boolean>(false)
  const clickUpload = () => {
    fileRef.current.click()
  }
@@ -61,18 +63,20 @@ const override = {
     reader.readAsDataURL(blob);
   });
 }
- 
- const uploadFile = async(event:React.ChangeEvent<HTMLInputElement>) => {
-  setUploadedFile(true)
-  
-  setLoading(true)
-  let tempkeys :any[]= []
+
+const convert = (type: String) => {
+
+   let tempkeys :any[]= []
   let tempHeaders:any[] = []
    //turn workbook into array
   let temp :any[]= []
   const temp_wb: any[] = []
-  setFiles([...fileRef.current.files])
+  if(type == 'original'){
+setFiles([...fileRef.current.files])
+  }
+  
   console.log(fileRef.current.files[0].lastModified.toString())
+  
   const reader = new FileReader();
  
   reader.onload = function () {
@@ -106,7 +110,11 @@ const override = {
             // console.log(key)
             if(row?.[key] == undefined){
               temp.push('')
-            } else{     
+            } else{   
+              //change the currency
+              if(key == "__EMPTY_2" || key == "__EMPTY_3"){
+                row[key] = currencyRef.current.value + row[key].toString() 
+              }
               temp.push(row[key])
             }
           })
@@ -129,16 +137,17 @@ const override = {
     
     reader.readAsDataURL(fileRef.current.files[0]); // convert → base64
     // setUploadedFile(!uploadedFile)
-      
+  return temp_wb
+}
+ 
+ const uploadFile = async(event:React.ChangeEvent<HTMLInputElement>) => {
+  console.log(currencyRef.current.value)
+  setUploadedFile(true)
+  
+  setLoading(true)
+  convert('original')
+  
   }
-  // `
-  // useEffect(() => {
-  //  if (uploadedFile) {   
-  //     previewPDF()
-   
-  // }
-   
-  // }, [previewData,user]);`
   useEffect(() => {
   if (!uploadedFile) return;
 
@@ -149,9 +158,11 @@ const override = {
       console.error(error);
     }
   };
-
+  
   generatePreview();
-}, [docu,fileId]);
+  
+}, [docu,fileId,updatedCurrency]);
+
 
 const previewPDF = async() => {
   const doc = await makePDF()
@@ -159,10 +170,6 @@ const previewPDF = async() => {
   setPreview(true)
   setFileId(fileRef.current.files[0].lastModified.toString())
   setPreviewData(pdfBlob)
- 
-  
-
-
   
 }
 
@@ -173,10 +180,17 @@ const downloadPDF = async() => {
 }
 
 const makePDF = async() => {
+console.log(docu)
 return finerInvoice(headers,docu)
 }
 
+const changeCurrency = async(event: React.ChangeEvent<HTMLSelectElement>) => {
+  convert('update')
+  await previewPDF();
 
+  setUpdatedCurrency(true)
+ 
+}
 
 
 
@@ -272,23 +286,23 @@ return finerInvoice(headers,docu)
 
            }
           </div>
+{
+  uploadedFile?
 
        <div className="billing_info flex flex-col gap-[1em] mb-[2em]">
           <p className='font-bold text-xl'>Currency Information</p>
-          <select id="currency" className=" border border-gray-200 rounded-sm outline  p-[1em] h-[3.25em]">
-              <option value="USD">
+          <select onChange={(e) => changeCurrency(e)} ref={currencyRef} id="currency" className=" border border-gray-200 rounded-sm outline  p-[1em] h-[3.25em]">
+              <option value="$">
                 🇺🇸 USD — $</option>
-              <option value="EUR">🇪🇺 EUR — €</option>
-              <option value="GBP">🇬🇧 GBP — £</option>
-              <option value="JPY">🇯🇵 JPY — ¥</option>
-              <option value="CNY">🇨🇳 CNY — ¥</option>
-              <option value="INR">🇮🇳 INR — ₹</option>
-              <option value="NGN">🇮🇳 INR — ₹</option>
+              <option value="€">🇪🇺 EUR — €</option>
+              <option value="£">🇬🇧 GBP — £</option>
+              <option value="¥">🇨🇳 CNY — ¥</option>
+              <option value="₦">🇳🇬 NGN — ₦</option>
               
           </select>
           </div>
-
-
+:''
+}
 {/* 
       <div className="billing_info flex flex-col gap-[1em]">
           <p className='font-bold text-xl'>Billing Information</p>
