@@ -195,21 +195,19 @@ const changeCurrency = async(event: React.ChangeEvent<HTMLSelectElement>) => {
 
 
   return (
-    <div className='w-full flex flex-row '>
+    <div className='w-full flex flex-col lg:flex-row '>
       {
         user!== null?
         <DashboardNav user={user?.user_metadata} fullNav={false} />:''
       }
 
-        <div className="uploader ml-[.5em] p-[1em] lg:mb-[4em] rounded-md flex flex-col gap-[1.5em]  shadow-xs  border-gray-200 lg:w-[30%] w-full lg:mt-[2em] lg:p-[1em] lg:ml-[12em]">
+        <div className="uploader ml-[.5em] p-[1em] lg:mb-[4em] rounded-md flex flex-col gap-[1.5em]  shadow-xs  border-gray-200 lg:w-[30%] w-full mt-[5em] lg:mt-[2em] lg:p-[1em] lg:ml-[12em]">
 {/* { files.length> 0?'': */}
       <p className='font-bold text-xl'>Create a new invoice</p>
       <p className='font-light text-sm -mt-[1.4em]'>Fill details for invoice</p>
 
             <div onClick={clickUpload} className="flex flex-col gap-[1em] border-3 border-gray-200 border-dashed  rounded-md p-[2em] border-spacing-x-[2em] text-center">
                 <AiOutlineCloudUpload className='text-5xl m-auto text-purple-700' />
-                <p className='font-bold'>Click or drag your excel file to upload</p>   
-
                 <input type="file" name="file"  accept=".xlsx,.xls" onChange={uploadFile} className='hidden' ref={fileRef} />
 
                 <p className='text-[#989797]'> XLSX / XLS (Max 5MB)</p> 
@@ -315,8 +313,8 @@ const changeCurrency = async(event: React.ChangeEvent<HTMLSelectElement>) => {
    </div>
         </div>
 
-        <div className="preview flex flex-col pt-[2.5em] w-[50%] ">
-          <div className="flex flex-row gap-[1em] mx-auto  ">
+        <div className="preview flex flex-col pt-[2.5em]  w-full lg:w-[50%] ">
+          <div className="flex flex-row gap-[1em] lg:ml-[15em] ml-[2em] mx-auto  ">
             <p className="preview">Preview</p>
             <p className="preview">PDF</p>
             <p className="preview">Preview</p>
@@ -344,7 +342,7 @@ const changeCurrency = async(event: React.ChangeEvent<HTMLSelectElement>) => {
 
         <p className='-ml-[1em]'>Converting.....</p>
   </ div>
-         : <p className='m-auto mt-[15em] ml-[20%] text-[#989797] '>Invoice will be previewed here after uploading and conversion</p>
+         : <p className='lg:m-auto lg:mt-[15em] ml-[2em] w-[20em] mt-[5em] lg:ml-[20%] text-[#989797] '>Invoice will be previewed here after uploading and conversion</p>
 }
         </div>
 

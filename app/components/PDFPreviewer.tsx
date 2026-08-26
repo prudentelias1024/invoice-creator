@@ -141,16 +141,16 @@ const renderImage = async (pdf: any, pageNum: number, temp:any[]) => {
 // }, [pdfImages]);
 
   return (
-    <div className="w-full h-screen ml-[2em]">
+    <div className="lg:w-full w-full pl-[1.5em] h-screen lg:ml-[2em]">
      { pdfImages.length > 0   ?  
        <Fade easing='ease'>
          { pdfImages.map((slideImage, index)=> {
         
            return (<div key={index}>
              {/* <img src={slideImage} alt="Preview PDF" className="w-full h-full ml-[2em] pl-[6em] shadow " /> */}
-               <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage})` }}>
+               <div className="flex lg:ml-[5em] h-screen bg-cover lg:mt-[1em] lg:bg-cover lg:justify-center lg:items-center  w-full lg:h-[160vh] "  style={{ 'backgroundImage': `url(${slideImage})` }}>
              
-                <span style={spanStyle}>{"Page: "+ ++index}</span>
+                {/* <span style={spanStyle}>{"Page: "+ ++index}</span> */}
             </div>
              </div>)
 })
