@@ -306,8 +306,13 @@ return finerInvoice(headers,docu)
             <p className="preview">Preview</p>
             <p className="preview">PDF</p>
             <p className="preview">Preview</p>
-            <button onClick={downloadPDF}  className='  text-white w-[7em] lg:w-[6em] p-[.5em] rounded-md mt-[-.5em] bg-purple-500  '>Download </button>  
+            {
+              uploadedFile?
+               <button onClick={downloadPDF}  className='  text-white w-[7em] lg:w-[6em] p-[.5em] rounded-md mt-[-.5em] bg-purple-500  '>Download </button>  
   
+              : ''
+            }
+        
           </div>
 
 {
