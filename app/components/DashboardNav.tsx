@@ -27,7 +27,7 @@ export default function Navbar({ user, fullNav }: NavbarProps) {
   
   return (
     <>
-     <div className='lg:hidden w-full mr-[5em]  absolute bg-green-500 top-[1em] left-[1em] '>
+     <div className='lg:hidden w-full mr-[5em]  absolute bg-purple-500 top-[1em] left-[1em] '>
 
       
     
@@ -37,7 +37,7 @@ export default function Navbar({ user, fullNav }: NavbarProps) {
 :
 
 
-      <div className=" text-white bg-green-500 z-50 h-screen fixed  top-[1em] w-[16em]
+      <div className=" text-white bg-purple-500  z-50 h-screen fixed  top-[0em] w-[16em]
        -left-[1em] pl-[2em]  pr-[1.5em] py-[6.75em] flex flex-col gap-[2em] ">
         <MdCancel onClick={toggleNav} className='text-2xl absolute top-[1.5em] left-[80%]'/>
           <div className='inline-flex gap-[1em]'>

@@ -24,7 +24,7 @@ const  Clients = () => {
     right: 'auto',
     bottom: 'auto',
     paddingRight: '5%',
-    width: '60%',
+    width: '80%',
     height: '80%',
     borderRadius: '2%',
     transform: 'translate(-50%, -50%)',
@@ -66,11 +66,11 @@ const  Clients = () => {
            ''
       }
 
-      <div className="clients ml-[15em]" id='clients'>
-        <div className='flex flex-row justify-between mr-[3em] mt-[3em] mb-[3em]'>
+      <div className="clients mt-[5em] pl-[2em] lg:ml-[15em]" id='clients'>
+        <div className='flex flex-row  w-full justify-between mr-[3em] lg:mt-0 mt-[3em] mb-[3em]'>
 
         <p className="font-bold text-xl">Clients</p>
-        <button onClick={openModal}  className='border  inline-flex gap-1.5 bg-purple-500 text-white px-[1em] py-2 rounded-md' >
+        <button onClick={openModal}  className='border ml-[5em] lg:ml-0 inline-flex gap-1.5 bg-purple-500 text-white px-[1em] py-2 rounded-md' >
           <AiOutlinePlus></AiOutlinePlus>
           <p className='text-sm'>Add New Client</p></button>
         </div>
@@ -91,14 +91,19 @@ const  Clients = () => {
          clients.length > 0 ?
           clients.map((client,idx) => {
             return <Client data={client} key={idx} deleted={setDeleted} edited={setEdited} />
-          }): <div className='inline-flex gap-2 justify-center w-full my-[4em] lg:mx-[15em]'>
-
-                        <p className='text-[#c5c5c5] ml-[1em] lg:ml-0'>No Client added yet</p>
-                  
-                    </div>
+          }): ''
         }
        
         </div>
+
+        {clients.length < 1 ?
+        <div className='inline-flex gap-2 justify-center w-full my-[4em] lg:mx-[15em]'>
+
+                        <p className='text-[#c5c5c5] w-full ml-[4em] lg:ml-0'>No Client added yet</p>
+                  
+                    </div>:
+                    
+                    ''}
       </div>
                  
     </div>

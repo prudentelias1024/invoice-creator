@@ -50,13 +50,13 @@ const customStyles = {
     
      
     
-     <div className='flex ml-[15em] flex-col'>
+     <div className='flex lg:ml-[15em] mt-[5em] flex-col'>
         
-           <div className="flex flex-row w-[97%] justify-between">
+           <div className="flex flex-row w-[97%]  justify-between">
 
 
-        <p className='font-bold text-lg  ml-[.5em] mt-[2em]'>Invoices</p>   
-        <button onClick={openModal} className="bg-purple-500 h-[2.5em] w-fit mx-[3em] mt-[2em] rounded-md text-white px-[2em] mr-">Upload a Spreadsheet   </button>
+        <p className='font-bold text-lg  ml-[1em] mt-[2em]'>Invoices</p>   
+        <button onClick={openModal} className="bg-purple-500 -mt-[3em] -ml-[1em] h-[2.5em] px-[1em] w-fit mx-[1em] lg:mx-[3em] rounded-md text-white lg:px-[2em] lg:mt-0 ">Upload Excel sheet   </button>
         </div>
         <Modal
         isOpen={modalIsOpen}

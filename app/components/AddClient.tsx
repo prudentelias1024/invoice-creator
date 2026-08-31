@@ -53,7 +53,7 @@ export default function AddClient({closeModal, created}: AddClientProps) {
       <p className="font-extrabold mt-[2em] ml-[1em]">Create a new Client</p>
       <MdOutlineCancel onClick={closeModal} className='absolute left-[80%] top-[1em] mb-[1em] text-xl ml-[6em]'/>
 
-<div className="grid grid-cols-2 gap-[1.5em] pt-[2em]">
+<div className="lg:grid lg:grid-cols-2 flex flex-col w-full gap-[1em] lg:gap-[1.5em] pt-[2em]">
 
 <div className='flex flex-col  ml-[1em]'>
 
@@ -94,7 +94,7 @@ export default function AddClient({closeModal, created}: AddClientProps) {
 </div>
 
 
-<button onClick={createClient} className='bg-purple-500 justify-around flex text-white p-[.5em] rounded-md text-sm mt-[3em] w-[10em] ml-[80%] pr-[1em]'>
+<button onClick={createClient} className='bg-purple-500 justify-around flex text-white p-[.5em] rounded-md text-sm mt-[3em] lg:w-[10em] w-[90%] lg:ml-[80%] ml-[1em] pr-[1em]'>
   
   <BounceLoader color={"#FFF"}
         loading={loading}
